@@ -1,3 +1,66 @@
-.app {
-	background: green;
+$aqua-green : #10c1a6;
+
+.header-nav {
+	border-bottom: 3px solid $aqua-green;
+}
+
+.react-redux-logo {
+	width: 300px;
+	height: 300px;
+	object-fit: cover;
+}
+
+.col-centered {
+	text-align: center;
+	float: none;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 10px 0;
+}
+
+.sign-in-panel {
+	border: 1px solid #ccc;
+	width: 40%;
+	
+	.header {
+		padding: 20px 0;
+		color: black;
+		background: #eee;
+		border-bottom: 2px solid #ccc;
+	}
+	
+	.sign-in-text {
+		color: $aqua-green;
+		font-weight: bold;
+		font-size: 24px;
+	}
+	
+	.footer {
+		padding: 10px 0;
+		
+		.sign-in-btn {
+			background: $aqua-green;
+			color: white;
+			font-weight: bold;
+			padding: 10px 0;
+		}
+	}
+}
+
+.image-option {
+	> div {
+		display: inline-block;
+	}
+	.image-block {
+		> img {
+			width: 30px;
+			height: 30px;
+			border-radius: 30px;
+			margin: 0 20px;
+		}
+	}
+	
+	.label-span {
+		vertical-align: middle;
+	}
 }
