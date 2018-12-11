@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 import './App.css';
+import './scss/styles.min.css';
 import routes from "./routes";
 
 class WouldYouRatherApp extends Component {
 	render() {
 		return (
 			<div className="app">
-				Hello World
-				{routes}
+				<header>
+					Nav Bar
+				</header>
+				<div className='content'>
+					{routes}
+				</div>
 			</div>
 		);
 	}
