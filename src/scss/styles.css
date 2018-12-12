@@ -49,4 +49,28 @@
 .image-option .label-span {
   vertical-align: middle; }
 
+.centered {
+  margin-left: auto;
+  margin-right: auto; }
+
+.right-border {
+  border-right: 1px solid #ccc; }
+
+.no-padding {
+  padding: 0; }
+
+.home {
+  width: 50%;
+  border: 1px solid #ccc; }
+  .home .header {
+    border-bottom: 1px solid #ccc; }
+    .home .header .btn {
+      border: none !important; }
+  .home .holder-header {
+    display: inline-block; }
+    .home .holder-header > li {
+      padding: 0 30px; }
+  .home .questions-holder {
+    padding: 10px; }
+
 /*# sourceMappingURL=styles.css.map */
