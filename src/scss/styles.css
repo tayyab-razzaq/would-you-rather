@@ -1,6 +1,12 @@
 .header-nav {
   border-bottom: 3px solid #10c1a6; }
 
+.custom-nav-item {
+  padding: 15px 10px; }
+
+.custom-btn-item {
+  padding: 10px 10px; }
+
 .react-redux-logo {
   width: 300px;
   height: 300px;

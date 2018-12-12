@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import WouldYouRatherApp from './App';
 import * as serviceWorker from './serviceWorker';
 import {createBrowserHistory} from "history";
-import {Router} from "react-router-dom";
+import {Route, Router} from "react-router-dom";
 import store from './store';
 
 
@@ -13,7 +13,7 @@ function App (props) {
 	return (
 		<Provider store={store} {...props}>
 			<Router history={createBrowserHistory()}>
-				<WouldYouRatherApp/>
+				<Route path="/" component={WouldYouRatherApp}/>
 			</Router>
 		</Provider>
 	);

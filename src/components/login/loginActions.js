@@ -1,5 +1,9 @@
-import {LOGGED_IN, FETCH_ALL_USER_SUCCESSFULLY} from '../../common/actionTypes';
+import {LOGGED_IN, FETCH_ALL_USER_SUCCESSFULLY, REINITIALIZED_STATE} from '../../common/actionTypes';
 import * as API from '../../utils/_DATA';
+
+export function reinitializedState() {
+	return {type: REINITIALIZED_STATE};
+}
 
 function fetchUsersSuccess(response) {
 	return {response, type: FETCH_ALL_USER_SUCCESSFULLY}

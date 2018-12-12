@@ -5,8 +5,7 @@ let initialState = new Map({
 	error: null,
 	statusSuccess: false,
 	isLoggedIn: false,
-	userId: null,
-	username: '',
+	user: null,
 	allUsers: []
 });
 
@@ -18,11 +17,7 @@ export default function loginReducer(state = initialState, action) {
 		case FETCH_ALL_USER_SUCCESSFULLY:
 			return state.merge({allUsers: action.response});
 		case LOGGED_IN:
-			return state.merge({
-				isLoggedIn: true,
-				userId: action.response.id,
-				username: action.response.name
-			});
+			return state.merge({isLoggedIn: true, user: action.response});
 		default:
 			return state;
 	}

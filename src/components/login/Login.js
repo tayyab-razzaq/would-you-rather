@@ -30,7 +30,6 @@ class Login extends Component {
 			return;
 		}
 		this.props.login(selectedUser).then(() => {
-			debugger;
 			this.props.history.push('/home');
 		});
 	};

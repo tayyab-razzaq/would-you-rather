@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import './scss/styles.min.css';
 import routes from "./routes";
-import Header from "./components/header/Header";
+import {Header} from "./components/header";
 
 
 class WouldYouRatherApp extends Component {
@@ -10,7 +10,7 @@ class WouldYouRatherApp extends Component {
 	render() {
 		return (
 			<div className="app">
-				<Header/>
+				<Header history={this.props.history}/>
 				<div className='content'>
 					{routes}
 				</div>

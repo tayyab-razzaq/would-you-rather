@@ -1,26 +1,92 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import {connect} from 'react-redux';
+import {HEADER} from '../../common/constants';
+import {reinitializedState} from '../login/loginActions';
 
 
 class Header extends Component {
 	
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			activeKey: 'home'
+		}
+	}
+	
+	componentDidMount() {
+		if (this.props.history.location.pathname !== '/login' && !this.props.loginReducer.get('isLoggedIn')) {
+			this.props.history.push('/login');
+		}
+	}
+	
+	onKeySelect = (event, activeKey) => {
+		event.preventDefault();
+		this.setState({activeKey});
+		if ('login' === activeKey) {
+			this.props.reinitializedState();
+		}
+		this.props.history.push(`/${activeKey}`);
+	};
+	
 	render() {
+		const isLoggedIn = this.props.loginReducer.get('isLoggedIn');
+		const navOptions = Object.keys(HEADER).map((key) => {
+			const isActiveKey = isLoggedIn && this.state.activeKey === key;
+			let keyClasses = [];
+			if (isActiveKey) {
+				keyClasses.push('active');
+			}
+			if (!isLoggedIn) {
+				keyClasses.push('disabled')
+			}
+			return (
+				<li className={keyClasses.join(' ')} key={key}>
+					<a href={`/${key}`} onClick={(e) => this.onKeySelect(e, key)}>{HEADER[key]}</a>
+				</li>
+			);
+		});
+		
+		let userDetail = null;
+		
+		if (isLoggedIn) {
+			const user = this.props.loginReducer.get('user');
+			userDetail = (
+				<ul className="nav navbar-nav navbar-right">
+					<li className='custom-nav-item'>Hello, {`${user['name']}`}</li>
+					<li><a href={'/login'} onClick={(e) => this.onKeySelect(e, 'login')}>Logout</a></li>
+				</ul>
+			)
+		}
 		return (
-			<Navbar className='header-nav'>
-				<Nav>
-					<NavItem eventKey={1} href="#">
-						Home
-					</NavItem>
-					<NavItem eventKey={2} href="#">
-						New Question
-					</NavItem>
-					<NavItem eventKey={2} href="#">
-						Leader Board
-					</NavItem>
-				</Nav>
-			</Navbar>
+			<nav className="navbar navbar-default">
+				<div className="container">
+					<div className="collapse navbar-collapse">
+						<ul className="nav navbar-nav">
+							{navOptions}
+						</ul>
+						{userDetail}
+					</div>
+				</div>
+			</nav>
 		);
 	}
 }
 
-export default Header;
+function mapStateToProps(state) {
+	return {
+		loginReducer: state.loginReducer,
+	};
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		dispatch: dispatch,
+		reinitializedState: function() {
+			dispatch(reinitializedState());
+		}
+	};
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
