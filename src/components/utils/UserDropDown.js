@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-class DropDown extends Component {
+class UserDropDown extends Component {
 	
 	formatOption = (option) => {
 		return (
@@ -29,10 +29,10 @@ class DropDown extends Component {
 	}
 }
 
-DropDown.propTypes = {
+UserDropDown.propTypes = {
 	options: PropTypes.array.isRequired,
 	onChange: PropTypes.func.isRequired,
 	value: PropTypes.object,
 };
 
-export default DropDown;
+export default UserDropDown;

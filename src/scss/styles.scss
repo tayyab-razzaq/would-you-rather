@@ -1,5 +1,13 @@
 $aqua-green : #10c1a6;
 
+.aqua-green-color {
+	color: $aqua-green;
+}
+
+.aqua-green-background {
+	background: $aqua-green;
+}
+
 .header-nav {
 	border-bottom: 3px solid $aqua-green;
 }
@@ -86,6 +94,43 @@ $aqua-green : #10c1a6;
 	padding: 0;
 }
 
+.half-tab {
+	width: 49.8%;
+	text-align: center;
+	
+	&.active {
+		> a {
+			background-color: #eee !important;
+		}
+	}
+	
+	> a {
+		color: black !important;
+	}
+}
+
+.question-table {
+	padding: 5px;
+	
+	.author {
+		background: #cdcdcd;
+	}
+	
+	.question-summary {
+		> div {
+			padding: 10px 5px;
+		}
+	}
+}
+
+.width-25 {
+	width: 25%;
+}
+
+.width-75 {
+	width: 75%;
+}
+
 .home {
 	width: 50%;
 	border: 1px solid #ccc;
@@ -108,5 +153,53 @@ $aqua-green : #10c1a6;
 	
 	.questions-holder {
 		padding: 10px;
+	}
+}
+
+.question-card {
+	width: 60%;
+	
+	.question-summary {
+		font-size: 16px;
+		
+		> div {
+			padding: 8px;
+		}
+		
+		.header {
+			font-size: 20px;
+			padding: 10px 0;
+		}
+		
+		.submit-btn {
+			background: $aqua-green;
+			color: white;
+			font-weight: bold;
+			padding: 5px 0;
+		}
+		
+		.result-choice {
+			padding: 10px;
+			margin-bottom: 10px;
+			border: 1px solid #ccc;
+			background: #f6f6f6;
+			
+			&.selected {
+				background: #e7fdfa;
+			}
+			
+			.col-centered {
+				padding: 0 !important;
+			}
+			
+			.custom-progress-bar {
+				height: 30px !important;
+				
+				> .progress-bar {
+					background: $aqua-green !important;;
+					line-height: 30px !important;
+				}
+			}
+		}
 	}
 }

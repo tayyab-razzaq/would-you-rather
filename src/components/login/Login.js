@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getAllUsers, login} from "./loginActions";
-import DropDown from "../utils/DropDown";
+import UserDropDown from "../utils/UserDropDown";
 import {Grid, Row, Col, Button} from 'react-bootstrap';
 import reactReduxLogo from '../../icons/react-redux.jpg';
 
@@ -71,7 +71,10 @@ class Login extends Component {
 				<Row>
 					<Col sm={12}>
 						<div>
-							<DropDown value={this.state.selectedUser} options={options} onChange={this.handleChange}/>
+							<UserDropDown
+								value={this.state.selectedUser}
+								options={options}
+								onChange={this.handleChange}/>
 						</div>
 					</Col>
 				</Row>
