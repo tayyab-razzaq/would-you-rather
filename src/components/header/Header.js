@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {HEADER} from '../../common/constants';
-import {reinitializedState} from '../login/loginActions';
+import {reinitializedState} from '../../actions/usersActions';
 
 
 class Header extends Component {
@@ -15,9 +15,14 @@ class Header extends Component {
 	}
 	
 	componentDidMount() {
-		if (this.props.history.location.pathname !== '/login' && !this.props.loginReducer.get('isLoggedIn')) {
-			// this.props.history.push('/login');
+		if (this.props.history.location.pathname !== '/login' && !this.props.usersReducer.get('isLoggedIn')) {
+			this.props.history.push('/login');
 		}
+		// else {
+		// 	if (this.props.history.location.pathname !== '') {
+		// 		this.setState({activeKey: this.props.history.location.pathname.replace('/', '')});
+		// 	}
+		// }
 	}
 	
 	onKeySelect = (event, activeKey) => {
@@ -30,7 +35,7 @@ class Header extends Component {
 	};
 	
 	render() {
-		const isLoggedIn = this.props.loginReducer.get('isLoggedIn');
+		const isLoggedIn = this.props.usersReducer.get('isLoggedIn');
 		const navOptions = Object.keys(HEADER).map((key) => {
 			const isActiveKey = isLoggedIn && this.state.activeKey === key;
 			let keyClasses = [];
@@ -50,7 +55,7 @@ class Header extends Component {
 		let userDetail = null;
 		
 		if (isLoggedIn) {
-			const user = this.props.loginReducer.get('user');
+			const user = this.props.usersReducer.get('user');
 			userDetail = (
 				<ul className="nav navbar-nav navbar-right">
 					<li className='custom-nav-item'>Hello, {`${user['name']}`}</li>
@@ -75,7 +80,7 @@ class Header extends Component {
 
 function mapStateToProps(state) {
 	return {
-		loginReducer: state.loginReducer,
+		usersReducer: state.usersReducer,
 	};
 }
 

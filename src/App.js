@@ -5,7 +5,7 @@ import routes from "./routes";
 import {Header} from "./components/header";
 
 
-class WouldYouRatherApp extends Component {
+export default class WouldYouRatherApp extends Component {
 	
 	render() {
 		return (
@@ -18,5 +18,3 @@ class WouldYouRatherApp extends Component {
 		);
 	}
 }
-
-export default WouldYouRatherApp;

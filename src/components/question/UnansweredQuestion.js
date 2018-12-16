@@ -44,7 +44,8 @@ class UnansweredQuestion extends Component {
 				<div className='radio-group'>
 					{questionOptions}
 				</div>
-				<div><Button block className='submit-btn'>Submit</Button></div>
+				<div><Button block className='submit-btn'
+				             onClick={() => this.props.onSubmit(this.state.value)}>Submit</Button></div>
 			</div>
 		
 		);
@@ -53,6 +54,7 @@ class UnansweredQuestion extends Component {
 
 UnansweredQuestion.propTypes = {
 	question: PropTypes.object.isRequired,
+	onSubmit: PropTypes.func.isRequired,
 };
 
 export default UnansweredQuestion;

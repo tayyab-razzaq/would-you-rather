@@ -8,11 +8,13 @@ import {createBrowserHistory} from "history";
 import {Route, Router} from "react-router-dom";
 import store from './store';
 
+let history = createBrowserHistory();
+
 
 function App (props) {
 	return (
 		<Provider store={store} {...props}>
-			<Router history={createBrowserHistory()}>
+			<Router history={history}>
 				<Route path="/" component={WouldYouRatherApp}/>
 			</Router>
 		</Provider>

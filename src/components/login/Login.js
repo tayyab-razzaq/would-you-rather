@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getAllUsers, login} from "./loginActions";
+import {getAllUsers, login} from "../../actions/usersActions";
 import UserDropDown from "../utils/UserDropDown";
 import {Grid, Row, Col, Button} from 'react-bootstrap';
 import reactReduxLogo from '../../icons/react-redux.jpg';
@@ -31,12 +31,13 @@ class Login extends Component {
 		}
 		this.props.login(selectedUser).then(() => {
 			this.props.history.push('/home');
+			// this.props.history.goBack();
 		});
 	};
 	
 	render() {
 		
-		const allUsers = this.props.loginReducer.get('allUsers');
+		const allUsers = this.props.usersReducer.get('allUsers');
 		
 		const options = Object.keys(allUsers).map((key) => {
 			return {...allUsers[key], value: allUsers[key]['id'], label: allUsers[key]['name']}
@@ -93,7 +94,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
 	return {
-		loginReducer: state.loginReducer,
+		usersReducer: state.usersReducer,
 	};
 }
 
