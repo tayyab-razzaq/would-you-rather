@@ -31,7 +31,9 @@ class Login extends Component {
 			return;
 		}
 		this.props.login(selectedUser).then(() => {
-			this.props.history.push(this.props.history.location.pathname);
+			let pathName = this.props.history.location.pathname;
+			pathName = pathName === '/login' ? '/home': pathName;
+			this.props.history.push(pathName);
 		});
 	};
 	

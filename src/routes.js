@@ -12,6 +12,6 @@ export default (
 		<Route exact path="/login" component={Login}/>
 		<AuthenticatedComponent exact path="/home" component={Home}/>
 		<AuthenticatedComponent exact path="/questions/:questionId" component={Question}/>
-		<AuthenticatedComponent exact path="/new-question" component={NewQuestion}/>
+		<AuthenticatedComponent exact path="/add" component={NewQuestion}/>
 	</Switch>
 );

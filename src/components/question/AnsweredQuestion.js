@@ -23,7 +23,7 @@ class AnsweredQuestion extends Component {
 		const choices = ['optionOne', 'optionTwo'];
 		
 		const questionOptions = choices.map((choice, choiceIndex) => {
-			const answerPercentage = questionResponses[choice]/total*100;
+			const answerPercentage = Number((questionResponses[choice]/total*100).toFixed(2));
 			const yourChoice = currentUserAnswer === choice;
 			let choiceClasses = ['result-choice'];
 			if (yourChoice) {

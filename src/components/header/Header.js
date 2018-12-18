@@ -10,26 +10,15 @@ class Header extends Component {
 		super(props);
 		
 		this.state = {
-			activeKey: 'home'
+			activeKey: ''
 		}
-	}
-	
-	componentDidMount() {
-		if (this.props.history.location.pathname !== '/login' && !this.props.usersReducer.get('isLoggedIn')) {
-			// this.props.history.push('/login');
-		}
-		// else {
-		// 	if (this.props.history.location.pathname !== '') {
-		// 		this.setState({activeKey: this.props.history.location.pathname.replace('/', '')});
-		// 	}
-		// }
 	}
 	
 	onKeySelect = (event, activeKey) => {
 		event.preventDefault();
 		this.setState({activeKey});
 		if ('login' === activeKey) {
-			this.props.reinitializedState();
+			// this.props.reinitializedState();
 		}
 		this.props.history.push(`/${activeKey}`);
 	};
