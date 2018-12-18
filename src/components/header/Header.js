@@ -16,7 +16,7 @@ class Header extends Component {
 	
 	componentDidMount() {
 		if (this.props.history.location.pathname !== '/login' && !this.props.usersReducer.get('isLoggedIn')) {
-			this.props.history.push('/login');
+			// this.props.history.push('/login');
 		}
 		// else {
 		// 	if (this.props.history.location.pathname !== '') {

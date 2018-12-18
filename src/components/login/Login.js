@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from "react-router-dom";
 import {getAllUsers, login} from "../../actions/usersActions";
 import UserDropDown from "../utils/UserDropDown";
 import {Grid, Row, Col, Button} from 'react-bootstrap';
@@ -30,8 +31,7 @@ class Login extends Component {
 			return;
 		}
 		this.props.login(selectedUser).then(() => {
-			this.props.history.push('/home');
-			// this.props.history.goBack();
+			this.props.history.push(this.props.history.location.pathname);
 		});
 	};
 	
@@ -111,4 +111,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

@@ -1,11 +1,12 @@
 import React, {Component} from "react"
-import {Redirect, Route} from "react-router-dom"
+import {Route} from "react-router-dom"
+import {Login} from './components/login';
 import {connect} from "react-redux";
 
 class AuthenticatedComponent extends Component {
 	render() {
 		if (!this.props.usersReducer.get('isLoggedIn')) {
-			return <Redirect to='/login' otherProps={...this.props}/>;
+			return <Login {...this.props}/>;
 		} else {
 			return <Route {...this.props} />;
 		}

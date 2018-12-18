@@ -1,15 +1,17 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Redirect, Switch} from 'react-router-dom';
 import {Login} from './components/login';
 import {Home} from './components/home';
 import {Question} from './components/question';
+import {NewQuestion} from './components/newQuestion';
 import AuthenticatedComponent from "./AuthenticatedComponent";
 
 export default (
 	<Switch>
-		<AuthenticatedComponent exact path={'/'} component={Home}/>
+		<Redirect exact path='/' to='/home'/>
 		<Route exact path="/login" component={Login}/>
-		<Route exact path="/home" component={Home}/>
-		<Route exact path="/questions/:questionId" component={Question}/>
+		<AuthenticatedComponent exact path="/home" component={Home}/>
+		<AuthenticatedComponent exact path="/questions/:questionId" component={Question}/>
+		<AuthenticatedComponent exact path="/new-question" component={NewQuestion}/>
 	</Switch>
 );
