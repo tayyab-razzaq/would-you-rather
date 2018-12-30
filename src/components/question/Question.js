@@ -2,32 +2,55 @@ import React, {Component} from 'react';
 import UnansweredQuestion from './UnansweredQuestion';
 import AnsweredQuestion from './AnsweredQuestion';
 import Grid from "react-bootstrap/es/Grid";
-import {getAllQuestions, getQuestionById, submitQuestionAnswer, getAllUpdatedQuestions} from '../../actions/questionsActions';
+import {
+	getAllQuestions,
+	getQuestionById,
+	submitQuestionAnswer,
+	getAllUpdatedQuestions
+} from '../../actions/questionsActions';
 import {getAllUpdatedUsers} from '../../actions/usersActions';
 import {connect} from "react-redux";
+import Loader from 'react-loader';
 
 
 class Question extends Component {
+	
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			loaded: false
+		};
+	}
 	
 	componentDidMount() {
 		const questionId = this.props.match.params['questionId'];
 		const questions = this.props.questionsReducer.get('questions');
 		if (Object.keys(questions).length === 0 && questions.constructor === Object) {
 			this.props.getAllQuestions().then(() => {
-				this.props.getQuestionById(questionId);
+				this.getQuestionById(questionId);
 			});
-		}
-		else {
-			this.props.getQuestionById(questionId);
+		} else {
+			this.getQuestionById(questionId);
 		}
 	}
+	
+	getQuestionById = (questionId) => {
+		this.props.getQuestionById(questionId);
+		this.setState({loaded: true});
+	};
 	
 	onAnswerSubmit = (option) => {
 		const currentUser = this.props.usersReducer.get('user');
 		const question = this.props.questionsReducer.get('question');
+		this.setState({loaded: false});
 		this.props.submitQuestionAnswer(currentUser.id, question.id, option).then(() => {
-			this.props.getAllUpdatedQuestions();
-			this.props.getAllUpdatedUsers();
+			const updateQuestions = this.props.getAllUpdatedQuestions();
+			const updateUsers = this.props.getAllUpdatedUsers();
+			
+			Promise.all([updateQuestions, updateUsers]).then(() => {
+				this.setState(() => ({loaded: true}));
+			});
 		});
 	};
 	
@@ -40,40 +63,46 @@ class Question extends Component {
 			const isAnsweredQuestion = allAnswers.includes(question.id);
 			
 			return (
-				<Grid>
-					<div className='question-card centered question-table'>
-						<table className='table table-bordered table-responsive table-stripped'>
-							<thead>
-							<tr>
-								<th colSpan={2} className='author'>{`${author.name} asks:`}</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td className='width-25'>
-									<div>
+				<Loader loaded={this.state.loaded}>
+					<Grid>
+						<div className='question-card centered question-table'>
+							<table className='table table-bordered table-responsive table-stripped'>
+								<thead>
+								<tr>
+									<th colSpan={2} className='author'>{`${author.name} asks:`}</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td className='width-25'>
 										<div>
-											<img src={author.avatarURL} alt='user_img'/>
+											<div>
+												<img src={author.avatarURL} alt='user_img'/>
+											</div>
 										</div>
-									</div>
-								</td>
-								<td className='width-75'>
-									{question.id !== -1 ?
-										isAnsweredQuestion ?
-											<AnsweredQuestion currentUser={currentUser} question={question}/> :
-											<UnansweredQuestion
-												question={question} onSubmit={this.onAnswerSubmit}/>
-										: null
-									}
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</Grid>
+									</td>
+									<td className='width-75'>
+										{question.id !== -1 ?
+											isAnsweredQuestion ?
+												<AnsweredQuestion currentUser={currentUser} question={question}/> :
+												<UnansweredQuestion
+													question={question} onSubmit={this.onAnswerSubmit}/>
+											: null
+										}
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</Grid>
+				</Loader>
 			);
 		} else {
-			return <div/>;
+			return (
+				<Loader loaded={this.state.loaded}>
+					<div/>
+				</Loader>
+			);
 		}
 	}
 }

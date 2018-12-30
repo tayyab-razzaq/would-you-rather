@@ -4,6 +4,7 @@ import {Login} from './components/login';
 import {Home} from './components/home';
 import {Question} from './components/question';
 import {NewQuestion} from './components/newQuestion';
+import {LeaderBoard} from './components/leaderBoard';
 import AuthenticatedComponent from "./AuthenticatedComponent";
 
 export default (
@@ -13,5 +14,6 @@ export default (
 		<AuthenticatedComponent exact path="/home" component={Home}/>
 		<AuthenticatedComponent exact path="/questions/:questionId" component={Question}/>
 		<AuthenticatedComponent exact path="/add" component={NewQuestion}/>
+		<AuthenticatedComponent exact path="/leaderboard" component={LeaderBoard}/>
 	</Switch>
 );
