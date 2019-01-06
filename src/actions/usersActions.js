@@ -2,13 +2,9 @@ import {
 	FETCH_ALL_UPDATED_USER_SUCCESSFULLY,
 	FETCH_ALL_USER_SUCCESSFULLY,
 	LOGGED_IN,
-	REINITIALIZED_STATE
+	SIGN_UP
 } from '../common/actionTypes';
 import * as API from '../utils/_DATA';
-
-export function reinitializedState() {
-	return {type: REINITIALIZED_STATE};
-}
 
 function usersFetchSuccessfully(response) {
 	return {response, type: FETCH_ALL_USER_SUCCESSFULLY}
@@ -36,5 +32,16 @@ export function login(userObj) {
 			if (response.hasOwnProperty(userObj['id'])) {
 				return dispatch(loginSuccessfully(userObj));
 			}
+		});
+}
+
+function signUpSuccessfully(user, allUsers) {
+	return {user, allUsers, type: SIGN_UP}
+}
+
+export function signUp(user) {
+	return dispatch =>
+		API._saveUser(user).then((allUsers) => {
+			return dispatch(signUpSuccessfully(user, allUsers));
 		});
 }

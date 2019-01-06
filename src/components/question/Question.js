@@ -37,7 +37,6 @@ class Question extends Component {
 	}
 	
 	getQuestionById = (questionId) => {
-		debugger;
 		this.props.getQuestionById(questionId).then(() => {
 			const question = this.props.questionsReducer.get('question');
 			if (!question) {
@@ -83,11 +82,7 @@ class Question extends Component {
 								<tbody>
 								<tr>
 									<td className='width-25'>
-										<div>
-											<div>
-												<img src={author.avatarURL} alt='user_img'/>
-											</div>
-										</div>
+										<img src={author.avatarURL} className='img-tag' alt='user_img'/>
 									</td>
 									<td className='width-75'>
 										{question.id !== -1 ?

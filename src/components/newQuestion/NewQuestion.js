@@ -26,6 +26,7 @@ class NewQuestion extends Component {
 	};
 	
 	onSubmitQuestion = () => {
+		debugger;
 		const author = this.props.usersReducer.get('user');
 		let {question} = this.state;
 		question.author = author.id;

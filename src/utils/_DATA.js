@@ -171,6 +171,22 @@ export function _saveQuestion(question) {
 	});
 }
 
+export function _saveUser(user) {
+	return new Promise(res => {
+		
+		setTimeout(() => {
+			users = {
+				...users,
+				[user.id]: {
+					...user
+				}
+			};
+			
+			res(users);
+		}, 1000);
+	});
+}
+
 export function _saveQuestionAnswer({authedUser, qid, answer}) {
 	return new Promise(res => {
 		setTimeout(() => {

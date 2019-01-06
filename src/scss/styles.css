@@ -75,7 +75,7 @@
   padding: 0; }
 
 .half-tab {
-  width: 49.8%;
+  width: 49.75%;
   text-align: center; }
   .half-tab.active > a {
     background-color: #eee !important; }
@@ -283,5 +283,18 @@
   .notfound a {
     padding: 7px 15px;
     font-size: 14px; } }
+#login-tabs > .nav-pills {
+  border: 1px solid #ccc; }
+#login-tabs > .tab-content {
+  margin-top: 20px; }
+  #login-tabs > .tab-content .sign-up > .row {
+    margin-top: 10px; }
+    #login-tabs > .tab-content .sign-up > .row label {
+      margin-top: 5px; }
+
+.img-tag {
+  height: 200px;
+  width: 200px;
+  object-fit: cover; }
 
 /*# sourceMappingURL=styles.css.map */

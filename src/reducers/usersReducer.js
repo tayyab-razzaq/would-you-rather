@@ -1,8 +1,8 @@
 import {Map} from 'immutable';
 import {USERS} from '../common/constants';
 import {
-	REINITIALIZED_STATE,
 	LOGGED_IN,
+	SIGN_UP,
 	FETCH_ALL_USER_SUCCESSFULLY,
 	FETCH_ALL_UPDATED_USER_SUCCESSFULLY
 } from '../common/actionTypes';
@@ -26,8 +26,6 @@ let initialState = new Map({
 
 export default function usersReducer(state = initialState, action) {
 	switch (action.type) {
-		case REINITIALIZED_STATE:
-			return initialState;
 		case FETCH_ALL_USER_SUCCESSFULLY:
 			return state.merge({allUsers: action.response});
 		case FETCH_ALL_UPDATED_USER_SUCCESSFULLY:
@@ -37,6 +35,8 @@ export default function usersReducer(state = initialState, action) {
 			});
 		case LOGGED_IN:
 			return state.merge({isLoggedIn: true, user: action.response});
+		case SIGN_UP:
+			return state.merge({isLoggedIn: true, user: action.user, allUsers: action.allUsers});
 		default:
 			return state;
 	}

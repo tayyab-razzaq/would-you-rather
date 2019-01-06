@@ -107,7 +107,7 @@ $aqua-green : #10c1a6;
 }
 
 .half-tab {
-	width: 49.8%;
+	width: 49.75%;
 	text-align: center;
 	
 	&.active {
@@ -401,4 +401,30 @@ $aqua-green : #10c1a6;
 		padding: 7px 15px;
 		font-size: 14px;
 	}
+}
+
+#login-tabs {
+	> .nav-pills {
+		border: 1px solid #ccc;
+	}
+	
+	> .tab-content {
+		margin-top: 20px;
+		
+		.sign-up {
+			> .row {
+				margin-top: 10px;
+				
+				label {
+					margin-top: 5px;
+				}
+			}
+		}
+	}
+}
+
+.img-tag {
+	height: 200px;
+	width: 200px;
+	object-fit: cover;
 }

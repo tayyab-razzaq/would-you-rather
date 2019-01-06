@@ -10,9 +10,7 @@ const UserDetail = ({user}) => {
 				<tbody>
 				<tr>
 					<td className='width-25 vertical-align'>
-						<div className='user-holder col-centered'>
-							<img src={user.avatarURL} alt='user_img'/>
-						</div>
+						<img src={user.avatarURL} className='img-tag' alt='user_img'/>
 					</td>
 					<td className='width-50 vertical-align user-detail'>
 						<div className='username'>

@@ -15,7 +15,9 @@ const QuestionCard = ({question, author}) => {
 				</thead>
 				<tbody>
 				<tr>
-					<td className='width-25'><img src={author.avatarURL} alt='user_img'/></td>
+					<td className='width-25'>
+						<img src={author.avatarURL} className='img-tag' alt='user_img'/>
+					</td>
 					<td className='width-75'>
 						<div className='question-summary'>
 							<div><strong>Would you Rather</strong></div>

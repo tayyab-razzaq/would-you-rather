@@ -8,7 +8,7 @@ class UserDropDown extends Component {
 		return (
 			<div className={'image-option'}>
 				<div className='image-block'>
-					<img src={option.avatarURL} alt='user'/>
+					<img src={option.avatarURL} className='img-tag' alt='user'/>
 				</div>
 				<div className='label-span'>
 					{option['label']}

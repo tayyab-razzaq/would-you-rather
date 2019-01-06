@@ -12,7 +12,8 @@ class Home extends Component {
 		super(props);
 		
 		this.state = {
-			loaded: false
+			loaded: false,
+			activeKey: 'first'
 		};
 	}
 	
@@ -32,6 +33,10 @@ class Home extends Component {
 		this.setState({loaded: true});
 	};
 	
+	onSelect = (activeKey) => {
+		this.setState({activeKey});
+	};
+	
 	
 	render() {
 		const loggedInUser = this.props.usersReducer.get('user');
@@ -42,11 +47,11 @@ class Home extends Component {
 		questions = questions.sort((a, b) => {return b.timestamp - a.timestamp});
 		const answeredQuestions = questions.filter(question => answers.includes(question.id));
 		const unansweredQuestions = questions.filter(question => !answers.includes(question.id));
-		
+		const {loaded, activeKey} = this.state;
 		return (
-			<Loader loaded={this.state.loaded}>
+			<Loader loaded={loaded}>
 				<Grid>
-					<TabContainer id="questions-tabs" defaultActiveKey="first">
+					<TabContainer id="questions-tabs" onSelect={this.onSelect} activeKey={activeKey}>
 						<div className='home centered'>
 							<Nav bsStyle="pills">
 								<NavItem eventKey="first" className='half-tab'>Unanswered Questions</NavItem>

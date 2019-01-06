@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
-import {getAllUsers, login} from "../../actions/usersActions";
-import UserDropDown from "../utils/UserDropDown";
-import {Grid, Row, Col, Button} from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import {getAllUsers, login, signUp} from "../../actions/usersActions";
+import {Grid, Row, Col, Nav, NavItem, TabContent, TabPane, TabContainer} from 'react-bootstrap';
 import reactReduxLogo from '../../icons/react-redux.jpg';
+import Loader from 'react-loader';
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 class Login extends Component {
@@ -13,16 +17,31 @@ class Login extends Component {
 		super(props);
 		
 		this.state = {
-			selectedUser: null
+			loaded: false,
+			selectedUser: null,
+			activeKey: 'first',
+			newUser: {
+				id: '',
+				name: '',
+				avatarURL: '',
+				answers: {},
+				questions: []
+			}
 		};
 	}
 	
 	componentDidMount() {
-		this.props.getAllUsers();
+		this.props.getAllUsers().then(() => {
+			this.setState({loaded: true});
+		});
 	}
 	
 	handleChange = (selectedUser) => {
 		this.setState({selectedUser});
+	};
+	
+	onSelect = (activeKey) => {
+		this.setState({activeKey});
 	};
 	
 	handleSignIn = () => {
@@ -30,66 +49,93 @@ class Login extends Component {
 		if (!selectedUser) {
 			return;
 		}
+		this.setState({loaded: false});
 		this.props.login(selectedUser).then(() => {
 			let pathName = this.props.history.location.pathname;
-			pathName = pathName === '/login' ? '/home': pathName;
-			this.props.history.push(pathName);
+			pathName = pathName === '/login' ? '/home' : pathName;
+			this.setState({loaded: true}, () => this.props.history.push(pathName));
 		});
 	};
+	
+	handleNewUserChange = (property, value) => {
+		const {newUser} = this.state;
+		newUser[property] = value;
+		this.setState({newUser});
+	};
+	
+	handleSignUp = () => {
+		const {newUser} = this.state;
+		const allUsers = this.props.usersReducer.get('allUsers');
+		if (allUsers.hasOwnProperty(newUser.id)) {
+			this.showErrorMessage('Username is already exists');
+			return;
+		}
+		if (!newUser.id || !newUser.name || !newUser.avatarURL) {
+			this.showErrorMessage('All fields are not completed');
+			return;
+		}
+		this.props.signUp(newUser);
+	};
+	
+	showErrorMessage = (message) => toast.error(message);
 	
 	render() {
 		
 		const allUsers = this.props.usersReducer.get('allUsers');
-		
-		const options = Object.keys(allUsers).map(key => {
-			return {...allUsers[key], value: allUsers[key].id, label: allUsers[key].name}
-		});
-		
+		const {loaded, selectedUser, activeKey, newUser} = this.state;
+		const signInText = activeKey === 'first' ? 'Sign in' : 'Sign up';
 		return (
-			
-			<Grid className='sign-in-panel'>
-				<Row className='header'>
-					<Col sm={12}>
-						<div className='col-centered'>
-							<strong>Welcome to Would you Rather App</strong>
-							<br/>
-							Please Sign in to continue
-						</div>
-					</Col>
-				</Row>
-				<Row>
-					<Col sm={12}>
-						<div className='col-centered'>
-							<img src={reactReduxLogo} alt='react-redux-logo' className='react-redux-logo'/>
-						</div>
-					</Col>
-				</Row>
-				<Row>
-					<Col sm={12}>
-						<div className='col-centered'>
-							<span className='sign-in-text'>Sign In</span>
-						</div>
-					</Col>
-				</Row>
-				<Row>
-					<Col sm={12}>
-						<div>
-							<UserDropDown
-								value={this.state.selectedUser}
-								options={options}
-								onChange={this.handleChange}/>
-						</div>
-					</Col>
-				</Row>
-				<Row>
-					<Col sm={12}>
-						<div className='col-centered footer'>
-							<Button block className='sign-in-btn' onClick={this.handleSignIn}>Sign In</Button>
-						</div>
-					</Col>
-				</Row>
-			</Grid>
-		
+			<Loader loaded={loaded}>
+				<Grid className='sign-in-panel'>
+					<Row className='header'>
+						<Col sm={12}>
+							<div className='col-centered'>
+								<strong>Welcome to Would you Rather App</strong>
+								<br/>
+								{`Please ${signInText} to continue`}
+							</div>
+						</Col>
+					</Row>
+					<Row>
+						<Col sm={12}>
+							<div className='col-centered'>
+								<img src={reactReduxLogo} alt='react-redux-logo' className='react-redux-logo'/>
+							</div>
+						</Col>
+					</Row>
+					<Row>
+						<Col sm={12}>
+							<TabContainer id="login-tabs" onSelect={this.onSelect} activeKey={activeKey}>
+								<div className='centered'>
+									<Nav bsStyle="pills">
+										<NavItem eventKey="first" className='half-tab'>Sign In</NavItem>
+										<NavItem eventKey="second" className='half-tab'>Sign Up</NavItem>
+									</Nav>
+									<TabContent animation>
+										<TabPane eventKey="first">
+											<SignIn
+												allUsers={allUsers} selectedUser={selectedUser}
+												handleChange={this.handleChange}
+												handleSignIn={this.handleSignIn}
+											/>
+										</TabPane>
+										<TabPane eventKey="second">
+											<div className='sign-up'>
+												<SignUp
+													allUsers={allUsers} user={newUser}
+													handleChange={this.handleNewUserChange}
+													handleSignUp={this.handleSignUp}
+												/>
+											</div>
+										</TabPane>
+									</TabContent>
+								</div>
+							</TabContainer>
+						</Col>
+					</Row>
+				</Grid>
+				<ToastContainer />
+			</Loader>
 		);
 	}
 }
@@ -107,6 +153,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		login(userObj) {
 			return dispatch(login(userObj));
+		},
+		signUp(user) {
+			return dispatch(signUp(user));
 		}
 	};
 }
