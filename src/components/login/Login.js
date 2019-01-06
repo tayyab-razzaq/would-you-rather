@@ -26,7 +26,7 @@ class Login extends Component {
 	};
 	
 	handleSignIn = () => {
-		const { selectedUser } = this.state;
+		const {selectedUser} = this.state;
 		if (!selectedUser) {
 			return;
 		}
@@ -41,8 +41,8 @@ class Login extends Component {
 		
 		const allUsers = this.props.usersReducer.get('allUsers');
 		
-		const options = Object.keys(allUsers).map((key) => {
-			return {...allUsers[key], value: allUsers[key]['id'], label: allUsers[key]['name']}
+		const options = Object.keys(allUsers).map(key => {
+			return {...allUsers[key], value: allUsers[key].id, label: allUsers[key].name}
 		});
 		
 		return (
@@ -102,11 +102,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		dispatch: dispatch,
-		getAllUsers: function() {
+		getAllUsers() {
 			return dispatch(getAllUsers());
 		},
-		login: function(userObj) {
+		login(userObj) {
 			return dispatch(login(userObj));
 		}
 	};

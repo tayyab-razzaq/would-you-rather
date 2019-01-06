@@ -24,20 +24,28 @@ class Question extends Component {
 	}
 	
 	componentDidMount() {
-		const questionId = this.props.match.params['questionId'];
+		const {questionId} = this.props.match.params;
 		const questions = this.props.questionsReducer.get('questions');
 		if (Object.keys(questions).length === 0 && questions.constructor === Object) {
 			this.props.getAllQuestions().then(() => {
 				this.getQuestionById(questionId);
 			});
-		} else {
+		}
+		else {
 			this.getQuestionById(questionId);
 		}
 	}
 	
 	getQuestionById = (questionId) => {
-		this.props.getQuestionById(questionId);
-		this.setState({loaded: true});
+		debugger;
+		this.props.getQuestionById(questionId).then(() => {
+			const question = this.props.questionsReducer.get('question');
+			if (!question) {
+				this.props.history.push('/page-404');
+				return;
+			}
+			this.setState({loaded: true});
+		});
 	};
 	
 	onAnswerSubmit = (option) => {
@@ -85,8 +93,7 @@ class Question extends Component {
 										{question.id !== -1 ?
 											isAnsweredQuestion ?
 												<AnsweredQuestion currentUser={currentUser} question={question}/> :
-												<UnansweredQuestion
-													question={question} onSubmit={this.onAnswerSubmit}/>
+												<UnansweredQuestion question={question} onSubmit={this.onAnswerSubmit}/>
 											: null
 										}
 									</td>
@@ -97,13 +104,12 @@ class Question extends Component {
 					</Grid>
 				</Loader>
 			);
-		} else {
-			return (
-				<Loader loaded={this.state.loaded}>
-					<div/>
-				</Loader>
-			);
 		}
+		return (
+			<Loader loaded={this.state.loaded}>
+				<div/>
+			</Loader>
+		);
 	}
 }
 
@@ -116,20 +122,19 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		dispatch: dispatch,
-		getAllQuestions: function () {
+		getAllQuestions() {
 			return dispatch(getAllQuestions());
 		},
-		getAllUpdatedUsers: function () {
+		getAllUpdatedUsers() {
 			return dispatch(getAllUpdatedUsers());
 		},
-		getAllUpdatedQuestions: function () {
+		getAllUpdatedQuestions() {
 			return dispatch(getAllUpdatedQuestions());
 		},
-		getQuestionById: function (questionId) {
+		getQuestionById(questionId) {
 			return dispatch(getQuestionById(questionId));
 		},
-		submitQuestionAnswer: function (authedUser, qid, answer) {
+		submitQuestionAnswer(authedUser, qid, answer) {
 			return dispatch(submitQuestionAnswer(authedUser, qid, answer));
 		}
 	};

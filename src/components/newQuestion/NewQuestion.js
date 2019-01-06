@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {getAllQuestions, getAllUpdatedQuestions, submitNewQuestion} from '../../actions/questionsActions';
 import {Grid, Row, Col, Button} from "react-bootstrap";
 import {getAllUpdatedUsers} from "../../actions/usersActions";
+import QuestionOption from './QuestionOption';
 
 
 class NewQuestion extends Component {
@@ -27,7 +28,7 @@ class NewQuestion extends Component {
 	onSubmitQuestion = () => {
 		const author = this.props.usersReducer.get('user');
 		let {question} = this.state;
-		question['author'] = author.id;
+		question.author = author.id;
 		this.props.submitNewQuestion(question).then(() => {
 			this.props.getAllUpdatedQuestions();
 			this.props.getAllUpdatedUsers();
@@ -55,16 +56,11 @@ class NewQuestion extends Component {
 					<Row>
 						<Col sm={12}><strong className='font-18'>Would You Rather ...</strong></Col>
 					</Row>
-					<Row>
-						<Col sm={12}>
-							<input
-								className='form-control'
-								placeholder='Enter Option One text here'
-								value={question['optionOneText']}
-								onChange={(e) => this.onChange(e, 'optionOneText')}
-							/>
-						</Col>
-					</Row>
+					<QuestionOption
+						text='Enter Option One text here'
+						value={question.optionOneText}
+						onChange={(e) => this.onChange(e, 'optionOneText')}
+					/>
 					<Row>
 						<Col sm={12}>
 							<div className='option-separator'>
@@ -74,16 +70,11 @@ class NewQuestion extends Component {
 							</div>
 						</Col>
 					</Row>
-					<Row>
-						<Col sm={12}>
-							<input
-								className='form-control'
-								placeholder='Enter Option two text here'
-								value={question['optionTwoText']}
-								onChange={(e) => this.onChange(e, 'optionTwoText')}
-							/>
-						</Col>
-					</Row>
+					<QuestionOption
+						text='Enter Option Two text here'
+						value={question.optionTwoText}
+						onChange={(e) => this.onChange(e, 'optionTwoText')}
+					/>
 					<hr/>
 					<Row>
 						<Col sm={12}>
@@ -107,17 +98,16 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		dispatch: dispatch,
-		getAllQuestions: function () {
+		getAllQuestions() {
 			return dispatch(getAllQuestions());
 		},
-		submitNewQuestion: function (question) {
+		submitNewQuestion(question) {
 			return dispatch(submitNewQuestion(question));
 		},
-		getAllUpdatedUsers: function () {
+		getAllUpdatedUsers() {
 			return dispatch(getAllUpdatedUsers());
 		},
-		getAllUpdatedQuestions: function () {
+		getAllUpdatedQuestions() {
 			return dispatch(getAllUpdatedQuestions());
 		},
 	};

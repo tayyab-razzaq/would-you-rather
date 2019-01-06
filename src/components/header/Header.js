@@ -1,33 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {HEADER} from '../../common/constants';
-import {reinitializedState} from '../../actions/usersActions';
 
 
 class Header extends Component {
 	
-	constructor(props) {
-		super(props);
-		
-		this.state = {
-			activeKey: ''
-		}
-	}
-	
 	onKeySelect = (event, activeKey) => {
 		event.preventDefault();
-		this.setState({activeKey});
-		if ('login' === activeKey) {
-			// this.props.reinitializedState();
-		}
 		this.props.history.push(`/${activeKey}`);
 	};
 	
 	render() {
 		const isLoggedIn = this.props.usersReducer.get('isLoggedIn');
 		const navOptions = Object.keys(HEADER).map((key) => {
-			const isActiveKey = isLoggedIn && this.state.activeKey === key;
-			let keyClasses = [];
+			const isActiveKey = isLoggedIn && this.props.pathname === `/${key}`;
+			const keyClasses = [];
 			if (isActiveKey) {
 				keyClasses.push('active');
 			}
@@ -73,14 +60,5 @@ function mapStateToProps(state) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		dispatch: dispatch,
-		reinitializedState: function() {
-			dispatch(reinitializedState());
-		}
-	};
-}
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);

@@ -77,8 +77,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		dispatch: dispatch,
-		getAllQuestions: function () {
+		getAllQuestions() {
 			return dispatch(getAllQuestions());
 		}
 	};

@@ -1,5 +1,6 @@
 import {
-	GET_ALL_QUESTIONS, GET_ALL_UPDATED_QUESTIONS,
+	GET_ALL_QUESTIONS,
+	GET_ALL_UPDATED_QUESTIONS,
 	GET_QUESTION_BY_ID,
 	SUBMIT_QUESTION_ANSWER_SUCCESSFULLY,
 	SUBMIT_QUESTION_SUCCESSFULLY
@@ -11,11 +12,9 @@ function questionsFetchedSuccessfully(response) {
 }
 
 export function getAllQuestions() {
-	return function (dispatch) {
-		return API._getQuestions().then(function (response) {
-			return dispatch(questionsFetchedSuccessfully(response));
-		});
-	};
+	return dispatch => API._getQuestions().then(response =>
+		dispatch(questionsFetchedSuccessfully(response))
+	);
 }
 
 function updatedQuestionsFetchedSuccessfully(response) {
@@ -23,11 +22,9 @@ function updatedQuestionsFetchedSuccessfully(response) {
 }
 
 export function getAllUpdatedQuestions() {
-	return function (dispatch) {
-		return API._getQuestions().then(function (response) {
-			return dispatch(updatedQuestionsFetchedSuccessfully(response));
-		});
-	};
+	return dispatch => API._getQuestions().then(response =>
+		dispatch(updatedQuestionsFetchedSuccessfully(response))
+	);
 }
 
 
@@ -36,9 +33,10 @@ function fetchQuestionByIdSuccessfully(questionId, response) {
 }
 
 export function getQuestionById(questionId) {
-	return function (dispatch) {
-		return dispatch(fetchQuestionByIdSuccessfully(questionId, {}));
-	};
+	return dispatch => new Promise(res => {
+		dispatch(fetchQuestionByIdSuccessfully(questionId, {}));
+		res();
+	});
 }
 
 
@@ -47,13 +45,10 @@ function submitQuestionAnswerSuccessfully(response) {
 }
 
 export function submitQuestionAnswer(authedUser, qid, answer) {
-	return function (dispatch) {
-		return API._saveQuestionAnswer({authedUser, qid, answer}).then(function () {
-			return dispatch(submitQuestionAnswerSuccessfully({authedUser, qid, answer}));
-		});
-	};
+	return dispatch => API._saveQuestionAnswer({authedUser, qid, answer}).then(() =>
+		dispatch(submitQuestionAnswerSuccessfully({authedUser, qid, answer}))
+	);
 }
-
 
 
 function submitNewQuestionSuccessfully(response) {
@@ -61,9 +56,7 @@ function submitNewQuestionSuccessfully(response) {
 }
 
 export function submitNewQuestion(question) {
-	return function (dispatch) {
-		return API._saveQuestion(question).then(function (formattedQuestion) {
-			return dispatch(submitNewQuestionSuccessfully(formattedQuestion));
-		});
-	};
+	return dispatch => API._saveQuestion(question).then(formattedQuestion =>
+		dispatch(submitNewQuestionSuccessfully(formattedQuestion))
+	);
 }

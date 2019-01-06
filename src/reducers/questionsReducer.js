@@ -22,7 +22,7 @@ export default function questionsReducer(state = initialState, action) {
 				question: state.get('question') ? action.response[state.get('question').id] : null
 			});
 		case GET_QUESTION_BY_ID:
-			return state.merge({question: state.get('questions')[action['questionId']]});
+			return state.merge({question: state.get('questions')[action.questionId]});
 		default:
 			return state;
 	}

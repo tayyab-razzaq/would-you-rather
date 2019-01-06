@@ -1,8 +1,8 @@
 import {
-	LOGGED_IN,
+	FETCH_ALL_UPDATED_USER_SUCCESSFULLY,
 	FETCH_ALL_USER_SUCCESSFULLY,
-	REINITIALIZED_STATE,
-	FETCH_ALL_UPDATED_USER_SUCCESSFULLY
+	LOGGED_IN,
+	REINITIALIZED_STATE
 } from '../common/actionTypes';
 import * as API from '../utils/_DATA';
 
@@ -15,11 +15,7 @@ function usersFetchSuccessfully(response) {
 }
 
 export function getAllUsers() {
-	return function (dispatch) {
-		return API._getUsers().then(function (response) {
-			return dispatch(usersFetchSuccessfully(response));
-		});
-	};
+	return dispatch => API._getUsers().then(response => dispatch(usersFetchSuccessfully(response)));
 }
 
 function updatedUsersFetchSuccessfully(response) {
@@ -27,11 +23,7 @@ function updatedUsersFetchSuccessfully(response) {
 }
 
 export function getAllUpdatedUsers() {
-	return function (dispatch) {
-		return API._getUsers().then(function (response) {
-			return dispatch(updatedUsersFetchSuccessfully(response));
-		});
-	};
+	return dispatch => API._getUsers().then(response => dispatch(updatedUsersFetchSuccessfully(response)));
 }
 
 function loginSuccessfully(response) {
@@ -39,11 +31,10 @@ function loginSuccessfully(response) {
 }
 
 export function login(userObj) {
-	return function (dispatch) {
-		return API._getUsers().then(function (response) {
-			if (userObj['id'] in response){
+	return dispatch =>
+		API._getUsers().then(response => {
+			if (response.hasOwnProperty(userObj['id'])) {
 				return dispatch(loginSuccessfully(userObj));
 			}
 		});
-	};
 }

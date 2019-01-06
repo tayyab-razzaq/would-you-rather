@@ -18,14 +18,12 @@ class UnansweredQuestion extends Component {
 	};
 	
 	render() {
-		
 		const {question} = this.props;
-		
 		const choices = ['optionOne', 'optionTwo'];
 		
-		const questionOptions = choices.map((choice, choiceIndex) => {
+		const questionOptions = choices.map(choice => {
 			return (
-				<div className="radio" key={choiceIndex}>
+				<div className="radio" key={choice}>
 					<label>
 						<input
 							type="radio"
@@ -44,8 +42,11 @@ class UnansweredQuestion extends Component {
 				<div className='radio-group'>
 					{questionOptions}
 				</div>
-				<div><Button block className='submit-btn'
-				             onClick={() => this.props.onSubmit(this.state.value)}>Submit</Button></div>
+				<div>
+					<Button  block className='submit-btn' onClick={() => this.props.onSubmit(this.state.value)}>
+						Submit
+					</Button>
+				</div>
 			</div>
 		
 		);
