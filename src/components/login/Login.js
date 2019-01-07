@@ -36,11 +36,11 @@ class Login extends Component {
 		});
 	}
 	
-	handleChange = (selectedUser) => {
+	handleChange = selectedUser => {
 		this.setState({selectedUser});
 	};
 	
-	onSelect = (activeKey) => {
+	onSelect = activeKey => {
 		this.setState({activeKey});
 	};
 	
@@ -77,7 +77,7 @@ class Login extends Component {
 		this.props.signUp(newUser);
 	};
 	
-	showErrorMessage = (message) => toast.error(message);
+	showErrorMessage = message => toast.error(message);
 	
 	render() {
 		

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Col, Row} from "react-bootstrap";
 
-const SignUp = (props) => {
+const SignUp = props => {
 	
 	return (
 		<React.Fragment>

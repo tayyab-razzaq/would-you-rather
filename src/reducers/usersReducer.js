@@ -1,8 +1,8 @@
 import {Map} from 'immutable';
-import {USERS} from '../common/constants';
 import {
 	LOGGED_IN,
 	SIGN_UP,
+	LOGOUT,
 	FETCH_ALL_USER_SUCCESSFULLY,
 	FETCH_ALL_UPDATED_USER_SUCCESSFULLY
 } from '../common/actionTypes';
@@ -11,21 +11,14 @@ let initialState = new Map({
 	error: null,
 	statusSuccess: false,
 	isLoggedIn: false,
-	user: {
-		id: 'tylermcginnis',
-		name: 'Tyler McGinnis',
-		avatarURL: 'https://image.flaticon.com/icons/svg/138/138682.svg',
-		answers: {
-			"vthrdm985a262al8qx3do": 'optionOne',
-			"xj352vofupe1dqz9emx13r": 'optionTwo',
-		},
-		questions: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do'],
-	},
-	allUsers: USERS
+	user: {},
+	allUsers: {}
 });
 
 export default function usersReducer(state = initialState, action) {
 	switch (action.type) {
+		case LOGOUT:
+			return state.merge({user: {}, isLoggedIn: false});
 		case FETCH_ALL_USER_SUCCESSFULLY:
 			return state.merge({allUsers: action.response});
 		case FETCH_ALL_UPDATED_USER_SUCCESSFULLY:

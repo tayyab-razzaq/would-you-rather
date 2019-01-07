@@ -33,7 +33,7 @@ class Home extends Component {
 		this.setState({loaded: true});
 	};
 	
-	onSelect = (activeKey) => {
+	onSelect = activeKey => {
 		this.setState({activeKey});
 	};
 	

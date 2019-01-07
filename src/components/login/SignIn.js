@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Col, Row} from "react-bootstrap";
 import UserDropDown from "../utils/UserDropDown";
 
-const SignIn = (props) => {
+const SignIn = props => {
 	const {allUsers, selectedUser} = props;
 	const options = Object.keys(allUsers).map(key => {
 		return {...allUsers[key], value: allUsers[key].id, label: allUsers[key].name}

@@ -36,7 +36,7 @@ class Question extends Component {
 		}
 	}
 	
-	getQuestionById = (questionId) => {
+	getQuestionById = questionId => {
 		this.props.getQuestionById(questionId).then(() => {
 			const question = this.props.questionsReducer.get('question');
 			if (!question) {
@@ -47,7 +47,7 @@ class Question extends Component {
 		});
 	};
 	
-	onAnswerSubmit = (option) => {
+	onAnswerSubmit = option => {
 		const currentUser = this.props.usersReducer.get('user');
 		const question = this.props.questionsReducer.get('question');
 		this.setState({loaded: false});

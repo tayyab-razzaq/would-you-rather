@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {logout} from '../../actions/usersActions';
 import {connect} from 'react-redux';
 import {HEADER} from '../../common/constants';
 
@@ -7,12 +8,15 @@ class Header extends Component {
 	
 	onKeySelect = (event, activeKey) => {
 		event.preventDefault();
+		if ('login' === activeKey) {
+			this.props.logout();
+		}
 		this.props.history.push(`/${activeKey}`);
 	};
 	
 	render() {
 		const isLoggedIn = this.props.usersReducer.get('isLoggedIn');
-		const navOptions = Object.keys(HEADER).map((key) => {
+		const navOptions = Object.keys(HEADER).map(key => {
 			const isActiveKey = isLoggedIn && this.props.pathname === `/${key}`;
 			const keyClasses = [];
 			if (isActiveKey) {
@@ -23,7 +27,7 @@ class Header extends Component {
 			}
 			return (
 				<li className={keyClasses.join(' ')} key={key}>
-					<a href={`/${key}`} onClick={(e) => this.onKeySelect(e, key)}>{HEADER[key]}</a>
+					<a href={`/${key}`} onClick={e => this.onKeySelect(e, key)}>{HEADER[key]}</a>
 				</li>
 			);
 		});
@@ -35,7 +39,7 @@ class Header extends Component {
 			userDetail = (
 				<ul className="nav navbar-nav navbar-right">
 					<li className='custom-nav-item'>Hello, {`${user['name']}`}</li>
-					<li><a href={'/login'} onClick={(e) => this.onKeySelect(e, 'login')}>Logout</a></li>
+					<li><a href={'/login'} onClick={e => this.onKeySelect(e, 'login')}>Logout</a></li>
 				</ul>
 			)
 		}
@@ -61,4 +65,13 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(Header);
+function mapDispatchToProps(dispatch) {
+	return {
+		logout() {
+			return dispatch(logout());
+		}
+	};
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

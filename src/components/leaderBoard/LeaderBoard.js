@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Grid from "react-bootstrap/es/Grid";
 import UserDetail from './UserDetail';
 
-const LeaderBoard = (props) => {
+const LeaderBoard = props => {
 	const users = props.usersReducer.get('allUsers');
 	
 	const sortedUsers = Object.keys(users).sort((a, b) => {

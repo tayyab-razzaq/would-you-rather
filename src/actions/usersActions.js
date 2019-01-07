@@ -2,7 +2,8 @@ import {
 	FETCH_ALL_UPDATED_USER_SUCCESSFULLY,
 	FETCH_ALL_USER_SUCCESSFULLY,
 	LOGGED_IN,
-	SIGN_UP
+	SIGN_UP,
+	LOGOUT
 } from '../common/actionTypes';
 import * as API from '../utils/_DATA';
 
@@ -12,6 +13,14 @@ function usersFetchSuccessfully(response) {
 
 export function getAllUsers() {
 	return dispatch => API._getUsers().then(response => dispatch(usersFetchSuccessfully(response)));
+}
+
+function loggedOutSuccessfully() {
+	return {type: LOGOUT}
+}
+
+export function logout() {
+	return dispatch => dispatch(loggedOutSuccessfully());
 }
 
 function updatedUsersFetchSuccessfully(response) {
@@ -41,7 +50,7 @@ function signUpSuccessfully(user, allUsers) {
 
 export function signUp(user) {
 	return dispatch =>
-		API._saveUser(user).then((allUsers) => {
+		API._saveUser(user).then(allUsers => {
 			return dispatch(signUpSuccessfully(user, allUsers));
 		});
 }

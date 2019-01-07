@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class UserDropDown extends Component {
 	
-	formatOption = (option) => {
+	formatOption = option => {
 		return (
 			<div className={'image-option'}>
 				<div className='image-block'>

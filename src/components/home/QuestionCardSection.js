@@ -6,12 +6,12 @@ const QuestionCardSection = ({questions, allUsers}) => {
 	return (
 		<React.Fragment>
 			{
-				questions.map((question, questionIndex) => {
+				questions.map(question => {
 					return (
 						<QuestionCard
 							author={allUsers[question.author]}
 							question={question}
-							key={questionIndex}/>
+							key={question.id}/>
 					);
 				})
 			}

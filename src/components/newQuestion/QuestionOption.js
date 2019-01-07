@@ -2,7 +2,7 @@ import React from 'react';
 import {Col, Row} from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const QuestionOption = (props) => {
+const QuestionOption = props => {
 	return (
 		<Row>
 			<Col sm={12}>

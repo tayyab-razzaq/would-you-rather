@@ -13,7 +13,7 @@ class UnansweredQuestion extends Component {
 		};
 	}
 	
-	onChange = (e) => {
+	onChange = e => {
 		this.setState({value: e.target.value});
 	};
 	

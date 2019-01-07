@@ -26,7 +26,6 @@ class NewQuestion extends Component {
 	};
 	
 	onSubmitQuestion = () => {
-		debugger;
 		const author = this.props.usersReducer.get('user');
 		let {question} = this.state;
 		question.author = author.id;
@@ -60,7 +59,7 @@ class NewQuestion extends Component {
 					<QuestionOption
 						text='Enter Option One text here'
 						value={question.optionOneText}
-						onChange={(e) => this.onChange(e, 'optionOneText')}
+						onChange={e => this.onChange(e, 'optionOneText')}
 					/>
 					<Row>
 						<Col sm={12}>
@@ -74,7 +73,7 @@ class NewQuestion extends Component {
 					<QuestionOption
 						text='Enter Option Two text here'
 						value={question.optionTwoText}
-						onChange={(e) => this.onChange(e, 'optionTwoText')}
+						onChange={e => this.onChange(e, 'optionTwoText')}
 					/>
 					<hr/>
 					<Row>
