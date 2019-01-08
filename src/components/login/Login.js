@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import {getAllUsers, login, signUp} from "../../actions/usersActions";
 import {Grid, Row, Col, Nav, NavItem, TabContent, TabPane, TabContainer} from 'react-bootstrap';
 import reactReduxLogo from '../../icons/react-redux.jpg';
@@ -9,6 +9,7 @@ import Loader from 'react-loader';
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import 'react-toastify/dist/ReactToastify.css';
+import {testImage} from '../../utils/common';
 
 
 class Login extends Component {
@@ -51,10 +52,14 @@ class Login extends Component {
 		}
 		this.setState({loaded: false});
 		this.props.login(selectedUser).then(() => {
-			let pathName = this.props.history.location.pathname;
-			pathName = pathName === '/login' ? '/home' : pathName;
-			this.setState({loaded: true}, () => this.props.history.push(pathName));
+			this.redirectToPreviousPage();
 		});
+	};
+	
+	redirectToPreviousPage = () => {
+		let pathName = this.props.history.location.pathname;
+		pathName = pathName === '/login' ? '/home' : pathName;
+		this.setState({loaded: true}, () => this.props.history.push(pathName));
 	};
 	
 	handleNewUserChange = (property, value) => {
@@ -74,7 +79,14 @@ class Login extends Component {
 			this.showErrorMessage('All fields are not completed');
 			return;
 		}
-		this.props.signUp(newUser);
+		testImage(newUser.avatarURL).then(() => {
+			this.setState({loaded: false});
+			this.props.signUp(newUser).then(() => {
+				this.redirectToPreviousPage();
+			});
+		}).catch(() => {
+			this.showErrorMessage('Provided url is not valid image');
+		});
 	};
 	
 	showErrorMessage = message => toast.error(message);
@@ -134,7 +146,7 @@ class Login extends Component {
 						</Col>
 					</Row>
 				</Grid>
-				<ToastContainer />
+				<ToastContainer/>
 			</Loader>
 		);
 	}

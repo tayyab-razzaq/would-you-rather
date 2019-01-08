@@ -297,4 +297,7 @@
   width: 200px;
   object-fit: cover; }
 
+.vertical-middle {
+  vertical-align: middle !important; }
+
 /*# sourceMappingURL=styles.css.map */

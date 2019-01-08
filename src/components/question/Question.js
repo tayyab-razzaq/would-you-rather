@@ -81,7 +81,7 @@ class Question extends Component {
 								</thead>
 								<tbody>
 								<tr>
-									<td className='width-25'>
+									<td className='width-25 vertical-middle'>
 										<img src={author.avatarURL} className='img-tag' alt='user_img'/>
 									</td>
 									<td className='width-75'>
