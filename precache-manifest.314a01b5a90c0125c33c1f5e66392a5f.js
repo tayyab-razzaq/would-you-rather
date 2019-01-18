@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "10921595715c76a00edb",
+    "revision": "01985f74b03be6c05e32",
     "url": "/reactnd-project-would-you-rather-starter/static/css/main.dfe4a376.chunk.css"
   },
   {
-    "revision": "10921595715c76a00edb",
-    "url": "/reactnd-project-would-you-rather-starter/static/js/main.10921595.chunk.js"
+    "revision": "01985f74b03be6c05e32",
+    "url": "/reactnd-project-would-you-rather-starter/static/js/main.01985f74.chunk.js"
   },
   {
     "revision": "a602c927c04b149cad3f",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/reactnd-project-would-you-rather-starter/static/media/react-redux.06e469f8.jpg"
   },
   {
-    "revision": "e635e55265147377ef597e7d98464f36",
+    "revision": "720909a00f62729a7f4ee0cdfecdb8c2",
     "url": "/reactnd-project-would-you-rather-starter/index.html"
   }
 ];
