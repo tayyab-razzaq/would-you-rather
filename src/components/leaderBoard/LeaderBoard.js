@@ -24,10 +24,6 @@ const LeaderBoard = props => {
 	);
 };
 
-function mapStateToProps(state) {
-	return {
-		usersReducer: state.usersReducer,
-	};
-}
+const mapStateToProps = ({usersReducer}) => ({usersReducer});
 
 export default connect(mapStateToProps)(LeaderBoard);

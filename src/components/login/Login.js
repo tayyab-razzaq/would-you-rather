@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from "react-router-dom";
+import {withRouter} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
-import {getAllUsers, login, signUp} from "../../actions/usersActions";
+import {getAllUsers, login, signUp} from '../../actions/usersActions';
 import {Grid, Row, Col, Nav, NavItem, TabContent, TabPane, TabContainer} from 'react-bootstrap';
 import reactReduxLogo from '../../icons/react-redux.jpg';
 import Loader from 'react-loader';
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 import 'react-toastify/dist/ReactToastify.css';
 import {testImage} from '../../utils/common';
 
@@ -152,25 +152,12 @@ class Login extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		usersReducer: state.usersReducer,
-	};
-}
+const mapStateToProps = ({usersReducer}) => ({usersReducer});
 
-function mapDispatchToProps(dispatch) {
-	return {
-		getAllUsers() {
-			return dispatch(getAllUsers());
-		},
-		login(userObj) {
-			return dispatch(login(userObj));
-		},
-		signUp(user) {
-			return dispatch(signUp(user));
-		}
-	};
-}
-
+const mapDispatchToProps = dispatch => ({
+	getAllUsers: () => dispatch(getAllUsers()),
+	login: userObj => dispatch(login(userObj)),
+	signUp: user => dispatch(signUp(user))
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 import {getAllQuestions, getAllUpdatedQuestions, submitNewQuestion} from '../../actions/questionsActions';
-import {Grid, Row, Col, Button} from "react-bootstrap";
-import {getAllUpdatedUsers} from "../../actions/usersActions";
+import {Grid, Row, Col, Button} from 'react-bootstrap';
+import {getAllUpdatedUsers} from '../../actions/usersActions';
 import QuestionOption from './QuestionOption';
 
 
@@ -89,29 +89,14 @@ class NewQuestion extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		questionsReducer: state.questionsReducer,
-		usersReducer: state.usersReducer,
-	};
-}
+const mapStateToProps = ({questionsReducer, usersReducer}) => ({questionsReducer, usersReducer});
 
-function mapDispatchToProps(dispatch) {
-	return {
-		getAllQuestions() {
-			return dispatch(getAllQuestions());
-		},
-		submitNewQuestion(question) {
-			return dispatch(submitNewQuestion(question));
-		},
-		getAllUpdatedUsers() {
-			return dispatch(getAllUpdatedUsers());
-		},
-		getAllUpdatedQuestions() {
-			return dispatch(getAllUpdatedQuestions());
-		},
-	};
-}
+const mapDispatchToProps = dispatch => ({
+	getAllQuestions: () => dispatch(getAllQuestions()),
+	submitNewQuestion: question => dispatch(submitNewQuestion(question)),
+	getAllUpdatedUsers: () => dispatch(getAllUpdatedUsers()),
+	getAllUpdatedQuestions: () => dispatch(getAllUpdatedQuestions())
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewQuestion);

@@ -58,20 +58,10 @@ class Header extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		usersReducer: state.usersReducer,
-	};
-}
+const mapStateToProps = ({usersReducer}) => ({usersReducer});
 
-
-function mapDispatchToProps(dispatch) {
-	return {
-		logout() {
-			return dispatch(logout());
-		}
-	};
-}
-
+const mapDispatchToProps = dispatch => ({
+	logout: () => dispatch(logout())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

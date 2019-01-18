@@ -73,20 +73,10 @@ class Home extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		questionsReducer: state.questionsReducer,
-		usersReducer: state.usersReducer,
-	};
-}
+const mapStateToProps = ({questionsReducer, usersReducer}) => ({questionsReducer, usersReducer});
 
-function mapDispatchToProps(dispatch) {
-	return {
-		getAllQuestions() {
-			return dispatch(getAllQuestions());
-		}
-	};
-}
-
+const mapDispatchToProps = dispatch => ({
+	getAllQuestions: () => dispatch(getAllQuestions())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

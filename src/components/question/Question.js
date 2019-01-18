@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import UnansweredQuestion from './UnansweredQuestion';
 import AnsweredQuestion from './AnsweredQuestion';
-import Grid from "react-bootstrap/es/Grid";
+import Grid from 'react-bootstrap/es/Grid';
 import {
 	getAllQuestions,
 	getQuestionById,
@@ -9,7 +9,7 @@ import {
 	getAllUpdatedQuestions
 } from '../../actions/questionsActions';
 import {getAllUpdatedUsers} from '../../actions/usersActions';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 import Loader from 'react-loader';
 
 
@@ -30,8 +30,7 @@ class Question extends Component {
 			this.props.getAllQuestions().then(() => {
 				this.getQuestionById(questionId);
 			});
-		}
-		else {
+		} else {
 			this.getQuestionById(questionId);
 		}
 	}
@@ -108,32 +107,15 @@ class Question extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		questionsReducer: state.questionsReducer,
-		usersReducer: state.usersReducer,
-	};
-}
+const mapStateToProps = ({questionsReducer, usersReducer}) => ({questionsReducer, usersReducer});
 
-function mapDispatchToProps(dispatch) {
-	return {
-		getAllQuestions() {
-			return dispatch(getAllQuestions());
-		},
-		getAllUpdatedUsers() {
-			return dispatch(getAllUpdatedUsers());
-		},
-		getAllUpdatedQuestions() {
-			return dispatch(getAllUpdatedQuestions());
-		},
-		getQuestionById(questionId) {
-			return dispatch(getQuestionById(questionId));
-		},
-		submitQuestionAnswer(authedUser, qid, answer) {
-			return dispatch(submitQuestionAnswer(authedUser, qid, answer));
-		}
-	};
-}
+const mapDispatchToProps = dispatch => ({
+	getAllQuestions: () => dispatch(getAllQuestions()),
+	getAllUpdatedUsers: () => dispatch(getAllUpdatedUsers()),
+	getAllUpdatedQuestions: () => dispatch(getAllUpdatedQuestions()),
+	getQuestionById: questionId => dispatch(getQuestionById(questionId)),
+	submitQuestionAnswer: (authedUser, qid, answer) => dispatch(submitQuestionAnswer(authedUser, qid, answer))
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
