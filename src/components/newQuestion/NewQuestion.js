@@ -4,6 +4,7 @@ import {getAllQuestions, getAllUpdatedQuestions, submitNewQuestion} from '../../
 import {Grid, Row, Col, Button} from 'react-bootstrap';
 import {getAllUpdatedUsers} from '../../actions/usersActions';
 import QuestionOption from './QuestionOption';
+import {URL} from '../../common/constants';
 
 
 class NewQuestion extends Component {
@@ -32,7 +33,7 @@ class NewQuestion extends Component {
 		this.props.submitNewQuestion(question).then(() => {
 			this.props.getAllUpdatedQuestions();
 			this.props.getAllUpdatedUsers();
-			this.props.history.push('/home');
+			this.props.history.push(`${URL}/home`);
 		});
 	};
 	

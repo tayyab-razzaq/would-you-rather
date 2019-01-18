@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {URL} from '../common/constants';
 
 export default () => {
 	return (
@@ -9,7 +10,7 @@ export default () => {
 					<h1>Oops!</h1>
 					<h2>404 - The Page can't be found</h2>
 				</div>
-				<Link to={`/home`}>GO TO HOMEPAGE</Link>
+				<Link to={`${URL}/home`}>GO TO HOMEPAGE</Link>
 			</div>
 		</div>
 	)

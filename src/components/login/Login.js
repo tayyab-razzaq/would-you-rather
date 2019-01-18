@@ -10,6 +10,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import 'react-toastify/dist/ReactToastify.css';
 import {testImage} from '../../utils/common';
+import {URL} from '../../common/constants';
 
 
 class Login extends Component {
@@ -59,7 +60,7 @@ class Login extends Component {
 	redirectToPreviousPage = () => {
 		let pathName = this.props.history.location.pathname;
 		pathName = pathName === '/login' ? '/home' : pathName;
-		this.setState({loaded: true}, () => this.props.history.push(pathName));
+		this.setState({loaded: true}, () => this.props.history.push(`${URL}/${pathName}`));
 	};
 	
 	handleNewUserChange = (property, value) => {

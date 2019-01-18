@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {logout} from '../../actions/usersActions';
 import {connect} from 'react-redux';
 import {HEADER} from '../../common/constants';
-
+import {URL} from '../../common/constants';
 
 class Header extends Component {
 	
@@ -11,13 +11,13 @@ class Header extends Component {
 		if ('login' === activeKey) {
 			this.props.logout();
 		}
-		this.props.history.push(`/${activeKey}`);
+		this.props.history.push(`${URL}/${activeKey}`);
 	};
 	
 	render() {
 		const isLoggedIn = this.props.usersReducer.get('isLoggedIn');
 		const navOptions = Object.keys(HEADER).map(key => {
-			const isActiveKey = isLoggedIn && this.props.pathname === `/${key}`;
+			const isActiveKey = isLoggedIn && this.props.pathname === `${URL}/${key}`;
 			const keyClasses = [];
 			if (isActiveKey) {
 				keyClasses.push('active');

@@ -11,6 +11,7 @@ import {
 import {getAllUpdatedUsers} from '../../actions/usersActions';
 import {connect} from 'react-redux';
 import Loader from 'react-loader';
+import {URL} from '../../common/constants';
 
 
 class Question extends Component {
@@ -39,7 +40,7 @@ class Question extends Component {
 		this.props.getQuestionById(questionId).then(() => {
 			const question = this.props.questionsReducer.get('question');
 			if (!question) {
-				this.props.history.push('/page-404');
+				this.props.history.push(`${URL}/page-404`);
 				return;
 			}
 			this.setState({loaded: true});
