@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "89d485b831eac5620114",
+    "revision": "8b7c3929bd6561bb27a7",
     "url": "/would-you-rather/static/css/main.dfe4a376.chunk.css"
   },
   {
-    "revision": "89d485b831eac5620114",
-    "url": "/would-you-rather/static/js/main.89d485b8.chunk.js"
+    "revision": "8b7c3929bd6561bb27a7",
+    "url": "/would-you-rather/static/js/main.8b7c3929.chunk.js"
   },
   {
     "revision": "a602c927c04b149cad3f",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/would-you-rather/static/media/react-redux.06e469f8.jpg"
   },
   {
-    "revision": "f4ab135a19f5aa97ec7abde8f19c169d",
+    "revision": "d6a55951eb8dd30ead8f69250fa0f3c4",
     "url": "/would-you-rather/index.html"
   }
 ];
