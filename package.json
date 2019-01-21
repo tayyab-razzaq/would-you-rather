@@ -18,7 +18,7 @@
 		"redux": "^4.0.1",
 		"redux-thunk": "^2.3.0"
 	},
-	"homepage": "http://tayyabrazzaq.github.io/reactnd-project-would-you-rather-starter",
+	"homepage": "http://tayyabrazzaq.github.io/would-you-rather",
 	"scripts": {
 		"start": "PORT=4000 react-scripts start",
 		"build": "react-scripts build",

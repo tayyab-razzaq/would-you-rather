@@ -4,4 +4,4 @@ export const HEADER = {
 	'leaderboard': 'Leader Board'
 };
 
-export const URL = '/reactnd-project-would-you-rather-starter';
+export const URL = '/would-you-rather';
