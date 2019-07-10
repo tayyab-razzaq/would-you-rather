@@ -1,27 +1,24 @@
 import React from 'react';
-import QuestionCard from './QuestionCard';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-const QuestionCardSection = ({questions, allUsers}) => {
-	return (
-		<React.Fragment>
-			{
-				questions.map(question => {
-					return (
-						<QuestionCard
-							author={allUsers[question.author]}
-							question={question}
-							key={question.id}/>
-					);
-				})
-			}
-		</React.Fragment>
-	);
-};
+import QuestionCard from './QuestionCard';
+
+const QuestionCardSection = ({ questions, allUsers }) => (
+    <>
+        {
+            questions.map(question => (
+                <QuestionCard
+                    author={allUsers[question.author]}
+                    question={question}
+                    key={question.id}/>
+            ))
+        }
+    </>
+);
 
 QuestionCardSection.propTypes = {
-	allUsers: PropTypes.object.isRequired,
-	questions: PropTypes.array.isRequired,
+    allUsers: PropTypes.object.isRequired,
+    questions: PropTypes.array.isRequired,
 };
 
 export default QuestionCardSection;

@@ -1,3 +1,1 @@
-import _NewQuestion from './NewQuestion';
-
-export {_NewQuestion as NewQuestion};
+export { default as NewQuestion } from './NewQuestion';

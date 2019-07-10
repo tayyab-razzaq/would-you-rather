@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 const UserDetail = ({user}) => {
 	const questions = user.questions.length;
 	const answers = Object.keys(user.answers).length;
+
 	return (
 		<div className='question-card centered question-table leaderboard'>
 			<table className='table table-bordered table-responsive table-stripped'>

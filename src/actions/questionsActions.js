@@ -1,62 +1,44 @@
 import {
-	GET_ALL_QUESTIONS,
-	GET_ALL_UPDATED_QUESTIONS,
-	GET_QUESTION_BY_ID,
-	SUBMIT_QUESTION_ANSWER_SUCCESSFULLY,
-	SUBMIT_QUESTION_SUCCESSFULLY
-} from "../common/actionTypes";
-import * as API from "../utils/_DATA";
+    GET_ALL_QUESTIONS,
+    GET_ALL_UPDATED_QUESTIONS,
+    GET_QUESTION_BY_ID,
+    SUBMIT_QUESTION_ANSWER_SUCCESSFULLY,
+    SUBMIT_QUESTION_SUCCESSFULLY,
+} from '../common/actionTypes';
+import * as API from '../utils/_DATA';
 
-function questionsFetchedSuccessfully(response) {
-	return {response, type: GET_ALL_QUESTIONS}
-}
+const questionsFetchedSuccessfully = response => ({ response, type: GET_ALL_QUESTIONS });
 
-export function getAllQuestions() {
-	return dispatch => API._getQuestions().then(response =>
-		dispatch(questionsFetchedSuccessfully(response))
-	);
-}
-
-function updatedQuestionsFetchedSuccessfully(response) {
-	return {response, type: GET_ALL_UPDATED_QUESTIONS}
-}
-
-export function getAllUpdatedQuestions() {
-	return dispatch => API._getQuestions().then(response =>
-		dispatch(updatedQuestionsFetchedSuccessfully(response))
-	);
-}
+// eslint-disable-next-line no-underscore-dangle
+export const getAllQuestions = () => dispatch => API._getQuestions().then(
+    response => dispatch(questionsFetchedSuccessfully(response)));
 
 
-function fetchQuestionByIdSuccessfully(questionId, response) {
-	return {response, questionId, type: GET_QUESTION_BY_ID}
-}
+const updatedQuestionsFetchedSuccessfully = response => ({ response, type: GET_ALL_UPDATED_QUESTIONS });
 
-export function getQuestionById(questionId) {
-	return dispatch => new Promise(res => {
-		dispatch(fetchQuestionByIdSuccessfully(questionId, {}));
-		res();
-	});
-}
+// eslint-disable-next-line no-underscore-dangle
+export const getAllUpdatedQuestions = () => dispatch => API._getQuestions().then(
+    response => dispatch(updatedQuestionsFetchedSuccessfully(response)));
 
 
-function submitQuestionAnswerSuccessfully(response) {
-	return {response, type: SUBMIT_QUESTION_ANSWER_SUCCESSFULLY}
-}
+const fetchQuestionByIdSuccessfully = (questionId, response) => ({ response, questionId, type: GET_QUESTION_BY_ID });
 
-export function submitQuestionAnswer(authedUser, qid, answer) {
-	return dispatch => API._saveQuestionAnswer({authedUser, qid, answer}).then(() =>
-		dispatch(submitQuestionAnswerSuccessfully({authedUser, qid, answer}))
-	);
-}
+export const getQuestionById = questionId => dispatch => new Promise(res => {
+    dispatch(fetchQuestionByIdSuccessfully(questionId, {}));
+    res();
+});
 
 
-function submitNewQuestionSuccessfully(response) {
-	return {response, type: SUBMIT_QUESTION_SUCCESSFULLY}
-}
+const submitQuestionAnswerSuccessfully = response => ({ response, type: SUBMIT_QUESTION_ANSWER_SUCCESSFULLY });
 
-export function submitNewQuestion(question) {
-	return dispatch => API._saveQuestion(question).then(formattedQuestion =>
-		dispatch(submitNewQuestionSuccessfully(formattedQuestion))
-	);
-}
+export const submitQuestionAnswer = (authedUser, qid, answer) => dispatch =>
+    // eslint-disable-next-line no-underscore-dangle
+    API._saveQuestionAnswer({ authedUser, qid, answer }).then(
+        () => dispatch(submitQuestionAnswerSuccessfully({ authedUser, qid, answer })));
+
+
+const submitNewQuestionSuccessfully = response => ({ response, type: SUBMIT_QUESTION_SUCCESSFULLY });
+
+// eslint-disable-next-line no-underscore-dangle
+export const submitNewQuestion = question => dispatch => API._saveQuestion(question).then(
+    formattedQuestion => dispatch(submitNewQuestionSuccessfully(formattedQuestion)));

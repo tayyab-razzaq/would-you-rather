@@ -1,56 +1,44 @@
 import {
-	FETCH_ALL_UPDATED_USER_SUCCESSFULLY,
-	FETCH_ALL_USER_SUCCESSFULLY,
-	LOGGED_IN,
-	SIGN_UP,
-	LOGOUT
+    FETCH_ALL_UPDATED_USER_SUCCESSFULLY,
+    FETCH_ALL_USER_SUCCESSFULLY,
+    LOGGED_IN,
+    SIGN_UP,
+    LOGOUT,
 } from '../common/actionTypes';
 import * as API from '../utils/_DATA';
 
-function usersFetchSuccessfully(response) {
-	return {response, type: FETCH_ALL_USER_SUCCESSFULLY}
-}
+const usersFetchSuccessfully = response => ({ response, type: FETCH_ALL_USER_SUCCESSFULLY });
 
-export function getAllUsers() {
-	return dispatch => API._getUsers().then(response => dispatch(usersFetchSuccessfully(response)));
-}
+export const getAllUsers = () => dispatch =>
+    // eslint-disable-next-line no-underscore-dangle
+    API._getUsers().then(response => dispatch(usersFetchSuccessfully(response)));
 
-function loggedOutSuccessfully() {
-	return {type: LOGOUT}
-}
 
-export function logout() {
-	return dispatch => dispatch(loggedOutSuccessfully());
-}
+const loggedOutSuccessfully = () => ({ type: LOGOUT });
 
-function updatedUsersFetchSuccessfully(response) {
-	return {response, type: FETCH_ALL_UPDATED_USER_SUCCESSFULLY}
-}
+export const logout = () => dispatch => dispatch(loggedOutSuccessfully());
 
-export function getAllUpdatedUsers() {
-	return dispatch => API._getUsers().then(response => dispatch(updatedUsersFetchSuccessfully(response)));
-}
 
-function loginSuccessfully(response) {
-	return {response, type: LOGGED_IN}
-}
+const updatedUsersFetchSuccessfully = response => ({ response, type: FETCH_ALL_UPDATED_USER_SUCCESSFULLY });
 
-export function login(userObj) {
-	return dispatch =>
-		API._getUsers().then(response => {
-			if (response.hasOwnProperty(userObj['id'])) {
-				return dispatch(loginSuccessfully(userObj));
-			}
-		});
-}
+export const getAllUpdatedUsers = () => dispatch =>
+    // eslint-disable-next-line no-underscore-dangle
+    API._getUsers().then(response => dispatch(updatedUsersFetchSuccessfully(response)));
 
-function signUpSuccessfully(user, allUsers) {
-	return {user, allUsers, type: SIGN_UP}
-}
 
-export function signUp(user) {
-	return dispatch =>
-		API._saveUser(user).then(allUsers => {
-			return dispatch(signUpSuccessfully(user, allUsers));
-		});
-}
+const loginSuccessfully = response => ({ response, type: LOGGED_IN });
+
+// eslint-disable-next-line no-underscore-dangle
+export const login = userObj => dispatch => API._getUsers().then(response => {
+    // eslint-disable-next-line no-prototype-builtins
+    if (response.hasOwnProperty(userObj.id)) {
+        dispatch(loginSuccessfully(userObj));
+    }
+});
+
+
+const signUpSuccessfully = (user, allUsers) => ({ user, allUsers, type: SIGN_UP });
+
+export const signUp = user => dispatch =>
+    // eslint-disable-next-line no-underscore-dangle
+    API._saveUser(user).then(allUsers => dispatch(signUpSuccessfully(user, allUsers)));

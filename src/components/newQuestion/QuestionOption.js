@@ -1,26 +1,24 @@
 import React from 'react';
-import {Col, Row} from "react-bootstrap";
-import PropTypes from "prop-types";
+import { Col, Row } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-const QuestionOption = props => {
-	return (
-		<Row>
-			<Col sm={12}>
-				<input
-					className='form-control'
-					placeholder={props.text}
-					value={props.value}
-					onChange={props.onChange}
-				/>
-			</Col>
-		</Row>
-	);
-};
+const QuestionOption = props => (
+    <Row>
+        <Col sm={12}>
+            <input
+                className='form-control'
+                placeholder={props.text}
+                value={props.value}
+                onChange={props.onChange}
+            />
+        </Col>
+    </Row>
+);
 
 QuestionOption.propTypes = {
-	text: PropTypes.string.isRequired,
-	value: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 
 export default QuestionOption;

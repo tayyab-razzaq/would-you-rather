@@ -1,22 +1,16 @@
-import React, {Component} from "react"
-import {Route} from "react-router-dom"
-import {Login} from './components/login';
-import {connect} from "react-redux";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { Login } from './components/login';
+import { connect } from 'react-redux';
 
-class AuthenticatedComponent extends Component {
-	render() {
-		if (!this.props.usersReducer.get('isLoggedIn')) {
-			return <Login {...this.props}/>;
-		} else {
-			return <Route {...this.props} />;
-		}
-	}
-}
+const AuthenticatedComponent = props => {
+    if (!props.usersReducer.get('isLoggedIn')) {
+        return <Login {...props}/>;
+    } else {
+        return <Route {...props} />;
+    }
+};
 
-function mapStateToProps(state) {
-	return {
-		usersReducer: state.usersReducer,
-	};
-}
+const mapStateToProps = ({ usersReducer }) => ({ usersReducer });
 
 export default connect(mapStateToProps)(AuthenticatedComponent);

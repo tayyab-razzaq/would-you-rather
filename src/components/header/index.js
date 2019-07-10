@@ -1,3 +1,1 @@
-import _Header from './Header';
-
-export {_Header as Header};
+export { default as Header } from './Header';
