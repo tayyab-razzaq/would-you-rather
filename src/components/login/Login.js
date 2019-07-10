@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { getAllUsers, signUp } from '../../actions/usersActions';
 import { Grid, Row, Col, Nav, NavItem, TabContent, TabPane, TabContainer } from 'react-bootstrap';
-import reactReduxLogo from '../../icons/react-redux.jpg';
 import Loader from 'react-loader';
+import PropTypes from 'prop-types';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { getAllUsers, signUp, login } from '../../actions';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import 'react-toastify/dist/ReactToastify.css';
-import { testImage } from '../../utils/common';
-import { URL } from '../../common/constants';
+import reactReduxLogo from '../../icons/react-redux.jpg';
+import { testImage } from '../../utils';
+import { URL } from '../../common';
 
 
 class Login extends Component {
@@ -64,6 +66,7 @@ class Login extends Component {
     handleSignUp = () => {
         const { newUser } = this.state;
         const allUsers = this.props.usersReducer.get('allUsers');
+        // eslint-disable-next-line no-prototype-builtins
         if (allUsers.hasOwnProperty(newUser.id)) {
             this.showErrorMessage('Username is already exists');
             return;
@@ -91,10 +94,10 @@ class Login extends Component {
         const signInText = activeKey === 'first' ? 'Sign in' : 'Sign up';
         return (
             <Loader loaded={loaded}>
-                <Grid className='sign-in-panel'>
-                    <Row className='header'>
+                <Grid className="sign-in-panel">
+                    <Row className="header">
                         <Col sm={12}>
-                            <div className='col-centered'>
+                            <div className="col-centered">
                                 <strong>Welcome to Would you Rather App</strong>
                                 <br/>
                                 {`Please ${signInText} to continue`}
@@ -103,18 +106,18 @@ class Login extends Component {
                     </Row>
                     <Row>
                         <Col sm={12}>
-                            <div className='col-centered'>
-                                <img src={reactReduxLogo} alt='react-redux-logo' className='react-redux-logo'/>
+                            <div className="col-centered">
+                                <img src={reactReduxLogo} alt="react-redux-logo" className="react-redux-logo"/>
                             </div>
                         </Col>
                     </Row>
                     <Row>
                         <Col sm={12}>
                             <TabContainer id="login-tabs" onSelect={this.onSelect} activeKey={activeKey}>
-                                <div className='centered'>
+                                <div className="centered">
                                     <Nav bsStyle="pills">
-                                        <NavItem eventKey="first" className='half-tab'>Sign In</NavItem>
-                                        <NavItem eventKey="second" className='half-tab'>Sign Up</NavItem>
+                                        <NavItem eventKey="first" className="half-tab">Sign In</NavItem>
+                                        <NavItem eventKey="second" className="half-tab">Sign Up</NavItem>
                                     </Nav>
                                     <TabContent animation>
                                         <TabPane eventKey="first">
@@ -125,7 +128,7 @@ class Login extends Component {
                                             />
                                         </TabPane>
                                         <TabPane eventKey="second">
-                                            <div className='sign-up'>
+                                            <div className="sign-up">
                                                 <SignUp
                                                     allUsers={allUsers} user={newUser}
                                                     handleChange={this.handleNewUserChange}
@@ -152,5 +155,13 @@ const mapDispatchToProps = dispatch => ({
     login: userObj => dispatch(login(userObj)),
     signUp: user => dispatch(signUp(user)),
 });
+
+Login.propTypes = {
+    history: PropTypes.object.isRequired,
+    usersReducer: PropTypes.object.isRequired,
+    getAllUsers: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    signUp: PropTypes.func.isRequired,
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

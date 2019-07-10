@@ -21,29 +21,27 @@ class UnansweredQuestion extends Component {
         const { question } = this.props;
         const choices = ['optionOne', 'optionTwo'];
 
-        const questionOptions = choices.map(choice => {
-            return (
-                <div className="radio" key={choice}>
-                    <label>
-                        <input
-                            type="radio"
-                            value={choice}
-                            onChange={this.onChange}
-                            checked={this.state.value === choice}/>
-                        {question[choice].text}
-                    </label>
-                </div>
-            );
-        });
+        const questionOptions = choices.map(choice => (
+            <div className="radio" key={choice}>
+                <label>
+                    <input
+                        type="radio"
+                        value={choice}
+                        onChange={this.onChange}
+                        checked={this.state.value === choice}/>
+                    {question[choice].text}
+                </label>
+            </div>
+        ));
 
         return (
-            <div className='question-summary'>
-                <div><strong className='header'>Would you Rather...</strong></div>
-                <div className='radio-group'>
+            <div className="question-summary">
+                <div><strong className="header">Would you Rather...</strong></div>
+                <div className="radio-group">
                     {questionOptions}
                 </div>
                 <div>
-                    <Button block className='submit-btn' onClick={() => this.props.onSubmit(this.state.value)}>
+                    <Button block className="submit-btn" onClick={() => this.props.onSubmit(this.state.value)}>
                         Submit
                     </Button>
                 </div>

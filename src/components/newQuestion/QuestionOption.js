@@ -6,7 +6,7 @@ const QuestionOption = props => (
     <Row>
         <Col sm={12}>
             <input
-                className='form-control'
+                className="form-control"
                 placeholder={props.text}
                 value={props.value}
                 onChange={props.onChange}

@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import Grid from 'react-bootstrap/es/Grid';
+import { connect } from 'react-redux';
+import Loader from 'react-loader';
+import PropTypes from 'prop-types';
+
 import UnansweredQuestion from './UnansweredQuestion';
 import AnsweredQuestion from './AnsweredQuestion';
-import Grid from 'react-bootstrap/es/Grid';
 import {
     getAllQuestions,
     getQuestionById,
     submitQuestionAnswer,
     getAllUpdatedQuestions,
-} from '../../actions/questionsActions';
-import { getAllUpdatedUsers } from '../../actions/usersActions';
-import { connect } from 'react-redux';
-import Loader from 'react-loader';
-import { URL } from '../../common/constants';
+    getAllUpdatedUsers
+} from '../../actions';
+import { URL } from '../../common';
 
 
 class Question extends Component {
@@ -31,7 +33,8 @@ class Question extends Component {
             this.props.getAllQuestions().then(() => {
                 this.getQuestionById(questionId);
             });
-        } else {
+        }
+        else {
             this.getQuestionById(questionId);
         }
     }
@@ -72,27 +75,29 @@ class Question extends Component {
             return (
                 <Loader loaded={this.state.loaded}>
                     <Grid>
-                        <div className='question-card centered question-table'>
-                            <table className='table table-bordered table-responsive table-stripped'>
+                        <div className="question-card centered question-table">
+                            <table className="table table-bordered table-responsive table-stripped">
                                 <thead>
-                                <tr>
-                                    <th colSpan={2} className='author'>{`${author.name} asks:`}</th>
-                                </tr>
+                                    <tr>
+                                        <th colSpan={2} className="author">{`${author.name} asks:`}</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td className='width-25 vertical-middle'>
-                                        <img src={author.avatarURL} className='img-tag' alt='user_img'/>
-                                    </td>
-                                    <td className='width-75'>
-                                        {question.id !== -1 ?
-                                            isAnsweredQuestion ?
-                                                <AnsweredQuestion currentUser={currentUser} question={question}/> :
-                                                <UnansweredQuestion question={question} onSubmit={this.onAnswerSubmit}/>
-                                            : null
-                                        }
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td className="width-25 vertical-middle">
+                                            <img src={author.avatarURL} className="img-tag" alt="user_img"/>
+                                        </td>
+                                        <td className="width-75">
+                                            {/* eslint-disable-next-line no-nested-ternary */}
+                                            {question.id !== -1 ?
+                                                isAnsweredQuestion ?
+                                                    <AnsweredQuestion currentUser={currentUser} question={question}/> :
+                                                    <UnansweredQuestion
+                                                        question={question} onSubmit={this.onAnswerSubmit}/>
+                                                : null
+                                            }
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -118,5 +123,16 @@ const mapDispatchToProps = dispatch => ({
     submitQuestionAnswer: (authedUser, qid, answer) => dispatch(submitQuestionAnswer(authedUser, qid, answer)),
 });
 
+Question.propTypes = {
+    match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    questionsReducer: PropTypes.object.isRequired,
+    usersReducer: PropTypes.object.isRequired,
+    getAllQuestions: PropTypes.func.isRequired,
+    getAllUpdatedUsers: PropTypes.func.isRequired,
+    getAllUpdatedQuestions: PropTypes.func.isRequired,
+    getQuestionById: PropTypes.func.isRequired,
+    submitQuestionAnswer: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);

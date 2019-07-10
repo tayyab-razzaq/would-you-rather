@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Col, Row } from 'react-bootstrap';
 
 const SignUp = props => (
@@ -9,8 +10,8 @@ const SignUp = props => (
             </Col>
             <Col sm={10}>
                 <input
-                    className='form-control'
-                    placeholder='Enter your username'
+                    className="form-control"
+                    placeholder="Enter your username"
                     value={props.user.id}
                     onChange={e => props.handleChange('id', e.target.value)}
                 />
@@ -22,8 +23,8 @@ const SignUp = props => (
             </Col>
             <Col sm={10}>
                 <input
-                    className='form-control'
-                    placeholder='Enter your complete name'
+                    className="form-control"
+                    placeholder="Enter your complete name"
                     value={props.user.name}
                     onChange={e => props.handleChange('name', e.target.value)}
                 />
@@ -35,8 +36,8 @@ const SignUp = props => (
             </Col>
             <Col sm={10}>
                 <input
-                    className='form-control'
-                    placeholder='Enter your image url'
+                    className="form-control"
+                    placeholder="Enter your image url"
                     value={props.user.avatarURL}
                     onChange={e => props.handleChange('avatarURL', e.target.value)}
                 />
@@ -44,12 +45,18 @@ const SignUp = props => (
         </Row>
         <Row>
             <Col sm={12}>
-                <div className='col-centered footer'>
-                    <Button block className='sign-in-btn' onClick={props.handleSignUp}>Sign Up</Button>
+                <div className="col-centered footer">
+                    <Button block className="sign-in-btn" onClick={props.handleSignUp}>Sign Up</Button>
                 </div>
             </Col>
         </Row>
     </>
 );
+
+SignUp.propTypes = {
+    user: PropTypes.object.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleSignUp: PropTypes.func.isRequired,
+};
 
 export default SignUp;

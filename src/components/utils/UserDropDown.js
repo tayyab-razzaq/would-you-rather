@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 class UserDropDown extends PureComponent {
 
     formatOption = option => (
-        <div className={'image-option'}>
-            <div className='image-block'>
-                <img src={option.avatarURL} className='img-tag' alt='user'/>
+        <div className="image-option">
+            <div className="image-block">
+                <img src={option.avatarURL} className="img-tag" alt="user"/>
             </div>
-            <div className='label-span'>
-                {option['label']}
+            <div className="label-span">
+                {option.label}
             </div>
         </div>
     );
@@ -31,6 +31,10 @@ UserDropDown.propTypes = {
     options: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.object,
+};
+
+UserDropDown.defaultProps = {
+    value: -1
 };
 
 export default UserDropDown;

@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'react-bootstrap/es/Grid';
+import PropTypes from 'prop-types';
+
 import UserDetail from './UserDetail';
 
 const LeaderBoard = props => {
@@ -25,5 +27,9 @@ const LeaderBoard = props => {
 };
 
 const mapStateToProps = ({ usersReducer }) => ({ usersReducer });
+
+LeaderBoard.propTypes = {
+    usersReducer: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps)(LeaderBoard);

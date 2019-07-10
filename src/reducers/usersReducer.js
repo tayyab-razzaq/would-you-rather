@@ -1,4 +1,5 @@
 import { Map } from 'immutable';
+
 import {
     LOGGED_IN,
     SIGN_UP,
@@ -15,7 +16,7 @@ const initialState = new Map({
     allUsers: {},
 });
 
-export default function usersReducer(state = initialState, action) {
+export default (state = initialState, action) => {
     switch (action.type) {
     case LOGOUT:
         return state.merge({ user: {}, isLoggedIn: false });
@@ -33,4 +34,4 @@ export default function usersReducer(state = initialState, action) {
     default:
         return state;
     }
-}
+};

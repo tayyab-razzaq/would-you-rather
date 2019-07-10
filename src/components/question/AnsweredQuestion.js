@@ -4,14 +4,14 @@ import { ProgressBar } from 'react-bootstrap';
 
 const AnsweredQuestion = ({ question, currentUser }) => {
 
-    const firstOptionsSelected = question['optionOne'].votes.length;
-    const secondOptionsSelected = question['optionTwo'].votes.length;
+    const firstOptionsSelected = question.optionOne.votes.length;
+    const secondOptionsSelected = question.optionTwo.votes.length;
 
     const total = firstOptionsSelected + secondOptionsSelected;
 
     const questionResponses = {
-        'optionOne': firstOptionsSelected,
-        'optionTwo': secondOptionsSelected,
+        optionOne: firstOptionsSelected,
+        optionTwo: secondOptionsSelected,
     };
 
     const currentUserAnswer = currentUser.answers[question.id];
@@ -27,13 +27,13 @@ const AnsweredQuestion = ({ question, currentUser }) => {
 
         return (
             <div key={choice} className={choiceClasses.join(' ')}>
-                <div className='aqua-green-color header'><strong>{question[choice].text}</strong></div>
+                <div className="aqua-green-color header"><strong>{question[choice].text}</strong></div>
                 <ProgressBar
                     now={answerPercentage}
                     label={`${answerPercentage}%`}
-                    className='custom-progress-bar'
+                    className="custom-progress-bar"
                 />
-                <div className='col-centered'>
+                <div className="col-centered">
                     <strong>{`${questionResponses[choice]} of ${total} votes`}</strong>
                 </div>
             </div>
@@ -41,9 +41,9 @@ const AnsweredQuestion = ({ question, currentUser }) => {
     });
 
     return (
-        <div className='question-summary'>
-            <div><strong className='header'>Would you Rather...</strong></div>
-            <div className='question-result'>
+        <div className="question-summary">
+            <div><strong className="header">Would you Rather...</strong></div>
+            <div className="question-result">
                 {questionOptions}
             </div>
         </div>

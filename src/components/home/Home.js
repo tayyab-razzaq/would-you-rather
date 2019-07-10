@@ -4,7 +4,7 @@ import { Grid, Nav, NavItem, TabContainer, TabPane, TabContent } from 'react-boo
 import Loader from 'react-loader';
 import PropTypes from 'prop-types';
 
-import { getAllQuestions } from '../../actions/questionsActions';
+import { getAllQuestions } from '../../actions';
 import QuestionCardSection from './QuestionCardSection';
 
 

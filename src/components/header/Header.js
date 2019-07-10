@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { logout } from '../../actions/usersActions';
+import { logout } from '../../actions';
 import { HEADER, URL } from '../../common';
 
 class Header extends PureComponent {

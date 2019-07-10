@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { URL } from '../../common/constants';
+import { URL } from '../../common';
 
 
 const QuestionCard = ({ question, author }) => (
